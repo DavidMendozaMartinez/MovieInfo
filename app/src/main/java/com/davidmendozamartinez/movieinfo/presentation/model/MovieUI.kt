@@ -11,5 +11,5 @@ data class MovieUI(
 fun MovieDomain.toPresentation(): MovieUI = MovieUI(
     id,
     title,
-    "https://www.themoviedb.org/t/p/w500$posterPath"
+    "https://image.tmdb.org/t/p/w500/$posterPath"
 )
