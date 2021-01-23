@@ -6,7 +6,7 @@ import com.davidmendozamartinez.movieinfo.domain.model.MovieDomain
 import com.davidmendozamartinez.movieinfo.domain.repository.MovieRepository
 import kotlinx.coroutines.flow.Flow
 
-class MovieRepositoryImp(private val remoteDataSource: MovieRemoteDataSource) : MovieRepository {
+class MovieRepositoryImpl(private val remoteDataSource: MovieRemoteDataSource) : MovieRepository {
 
     override fun getPopularMovies(): Flow<PagingData<MovieDomain>> =
         remoteDataSource.getPopularMovies()

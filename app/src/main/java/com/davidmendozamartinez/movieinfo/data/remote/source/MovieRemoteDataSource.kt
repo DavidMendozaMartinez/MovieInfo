@@ -12,12 +12,15 @@ class MovieRemoteDataSource(private val service: TheMovieDBService) {
 
     companion object {
         private const val PAGE_SIZE = 20
+        private const val MAX_SIZE = 100
     }
 
     fun getPopularMovies(): Flow<PagingData<MovieDomain>> =
         Pager(
             config = PagingConfig(
-                pageSize = PAGE_SIZE
+                pageSize = PAGE_SIZE,
+                maxSize = MAX_SIZE,
+                enablePlaceholders = false
             ),
             pagingSourceFactory = { MoviePagingSource(service) }
         ).flow

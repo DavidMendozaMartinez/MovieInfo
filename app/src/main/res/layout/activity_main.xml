@@ -6,5 +6,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-    tools:context=".presentation.MainActivity"
+    tools:context=".presentation.ui.MainActivity"
     tools:listitem="@layout/item_movie" />

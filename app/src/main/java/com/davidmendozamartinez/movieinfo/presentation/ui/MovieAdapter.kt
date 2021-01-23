@@ -1,4 +1,4 @@
-package com.davidmendozamartinez.movieinfo.presentation
+package com.davidmendozamartinez.movieinfo.presentation.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,6 +6,8 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.davidmendozamartinez.movieinfo.databinding.ItemMovieBinding
+import com.davidmendozamartinez.movieinfo.presentation.model.MovieUI
+import com.davidmendozamartinez.movieinfo.presentation.util.bindImageFromUrl
 
 class MovieAdapter : PagingDataAdapter<MovieUI, MovieAdapter.ViewHolder>(MovieDiffCallback()) {
 
