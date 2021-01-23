@@ -1,4 +1,4 @@
-package com.davidmendozamartinez.movieinfo
+package com.davidmendozamartinez.movieinfo.presentation
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter

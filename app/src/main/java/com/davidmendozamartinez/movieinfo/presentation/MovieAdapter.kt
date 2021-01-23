@@ -1,4 +1,4 @@
-package com.davidmendozamartinez.movieinfo
+package com.davidmendozamartinez.movieinfo.presentation
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.davidmendozamartinez.movieinfo.databinding.ItemMovieBinding
 
-class MovieAdapter : ListAdapter<Movie, MovieAdapter.ViewHolder>(MovieDiffCallback()) {
+class MovieAdapter : ListAdapter<MovieUI, MovieAdapter.ViewHolder>(MovieDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
@@ -30,14 +30,17 @@ class MovieAdapter : ListAdapter<Movie, MovieAdapter.ViewHolder>(MovieDiffCallba
             }
         }
 
-        fun bind(item: Movie) {
+        fun bind(item: MovieUI) {
             binding.title.text = item.title
             binding.poster.bindImageFromUrl(item.posterUrl)
         }
     }
 }
 
-class MovieDiffCallback : DiffUtil.ItemCallback<Movie>() {
-    override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean = oldItem.id == newItem.id
-    override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean = oldItem == newItem
+class MovieDiffCallback : DiffUtil.ItemCallback<MovieUI>() {
+    override fun areItemsTheSame(oldItem: MovieUI, newItem: MovieUI): Boolean =
+        oldItem.id == newItem.id
+
+    override fun areContentsTheSame(oldItem: MovieUI, newItem: MovieUI): Boolean =
+        oldItem == newItem
 }
