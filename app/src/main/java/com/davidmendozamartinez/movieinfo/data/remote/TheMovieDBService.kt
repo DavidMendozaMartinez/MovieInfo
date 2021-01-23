@@ -23,7 +23,7 @@ interface TheMovieDBService {
         @Query("api_key") apiKey: String = BuildConfig.THE_MOVIE_DB_API_KEY,
         @Query("language") language: String = "en-US",
         @Query("page") page: Int = 1,
-    ): List<MovieRemote>
+    ): GetPopularResponse
 
     @GET(Routes.GET_DETAILS)
     suspend fun getDetails(
