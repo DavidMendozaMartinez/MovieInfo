@@ -1,4 +1,4 @@
-package com.davidmendozamartinez.movieinfo.data.remote
+package com.davidmendozamartinez.movieinfo.data.remote.model
 
 import com.davidmendozamartinez.movieinfo.domain.model.MovieDomain
 import com.google.gson.annotations.SerializedName
@@ -7,7 +7,7 @@ data class MovieRemote(
     @SerializedName("poster_path") val posterPath: String?,
     val adult: Boolean,
     val overview: String,
-    @SerializedName("release_date") val releaseDate: String,
+    @SerializedName("release_date") val releaseDate: String?,
     @SerializedName("genre_ids") val genreIds: List<Int>,
     val id: Int,
     @SerializedName("original_title") val originalTitle: String,

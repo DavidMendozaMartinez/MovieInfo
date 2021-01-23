@@ -1,4 +1,4 @@
-package com.davidmendozamartinez.movieinfo.data.remote
+package com.davidmendozamartinez.movieinfo.data.remote.model
 
 import com.google.gson.annotations.SerializedName
 

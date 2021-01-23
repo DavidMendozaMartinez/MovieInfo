@@ -1,12 +1,14 @@
 package com.davidmendozamartinez.movieinfo.data.repository
 
-import com.davidmendozamartinez.movieinfo.data.remote.MovieRemoteDataSource
+import androidx.paging.PagingData
+import com.davidmendozamartinez.movieinfo.data.remote.source.MovieRemoteDataSource
 import com.davidmendozamartinez.movieinfo.domain.model.MovieDomain
 import com.davidmendozamartinez.movieinfo.domain.repository.MovieRepository
+import kotlinx.coroutines.flow.Flow
 
 class MovieRepositoryImp(private val remoteDataSource: MovieRemoteDataSource) : MovieRepository {
 
-    override suspend fun getPopularMovies(): List<MovieDomain> =
+    override fun getPopularMovies(): Flow<PagingData<MovieDomain>> =
         remoteDataSource.getPopularMovies()
 
     override suspend fun getMovieDetails(id: Int): MovieDomain =

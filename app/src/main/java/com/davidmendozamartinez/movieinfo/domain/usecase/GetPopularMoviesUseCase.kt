@@ -1,8 +1,10 @@
 package com.davidmendozamartinez.movieinfo.domain.usecase
 
+import androidx.paging.PagingData
 import com.davidmendozamartinez.movieinfo.domain.model.MovieDomain
 import com.davidmendozamartinez.movieinfo.domain.repository.MovieRepository
+import kotlinx.coroutines.flow.Flow
 
 class GetPopularMoviesUseCase(private val repository: MovieRepository) {
-    suspend fun invoke(): List<MovieDomain> = repository.getPopularMovies()
+    fun invoke(): Flow<PagingData<MovieDomain>> = repository.getPopularMovies()
 }

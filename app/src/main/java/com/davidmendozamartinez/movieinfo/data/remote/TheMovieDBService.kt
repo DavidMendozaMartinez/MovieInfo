@@ -1,6 +1,8 @@
 package com.davidmendozamartinez.movieinfo.data.remote
 
 import com.davidmendozamartinez.movieinfo.BuildConfig
+import com.davidmendozamartinez.movieinfo.data.remote.model.GetPopularResponse
+import com.davidmendozamartinez.movieinfo.data.remote.model.MovieRemote
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET

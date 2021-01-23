@@ -1,6 +1,6 @@
 package com.davidmendozamartinez.movieinfo.di
 
-import com.davidmendozamartinez.movieinfo.data.remote.MovieRemoteDataSource
+import com.davidmendozamartinez.movieinfo.data.remote.source.MovieRemoteDataSource
 import com.davidmendozamartinez.movieinfo.data.remote.createTheMovieDBService
 import com.davidmendozamartinez.movieinfo.data.repository.MovieRepositoryImp
 import com.davidmendozamartinez.movieinfo.domain.repository.MovieRepository

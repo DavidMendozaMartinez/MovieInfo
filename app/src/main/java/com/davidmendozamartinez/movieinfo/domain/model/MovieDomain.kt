@@ -4,7 +4,7 @@ data class MovieDomain(
     val posterPath: String?,
     val adult: Boolean,
     val overview: String,
-    val releaseDate: String,
+    val releaseDate: String?,
     val genreIds: List<Int>,
     val id: Int,
     val originalTitle: String,

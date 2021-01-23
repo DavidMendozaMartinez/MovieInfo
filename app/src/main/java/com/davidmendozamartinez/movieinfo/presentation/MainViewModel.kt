@@ -1,24 +1,28 @@
 package com.davidmendozamartinez.movieinfo.presentation
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import androidx.paging.map
 import com.davidmendozamartinez.movieinfo.domain.usecase.GetPopularMoviesUseCase
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class MainViewModel(private val useCase: GetPopularMoviesUseCase) : ViewModel() {
 
-    private val _movies: MutableLiveData<List<MovieUI>> = MutableLiveData()
-    val movies: LiveData<List<MovieUI>> get() = _movies
+    private var currentMovies: Flow<PagingData<MovieUI>>? = null
 
     init {
         getPopularMovies()
     }
 
-    private fun getPopularMovies() {
-        viewModelScope.launch {
-            _movies.value = useCase.invoke().map { it.toPresentation() }
-        }
+    fun getPopularMovies(): Flow<PagingData<MovieUI>> {
+        return currentMovies ?: useCase.invoke()
+            .map { pagingData ->
+                pagingData.map { it.toPresentation() }
+            }
+            .cachedIn(viewModelScope)
+            .also { currentMovies = it }
     }
 }

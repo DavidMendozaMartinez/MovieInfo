@@ -2,12 +2,12 @@ package com.davidmendozamartinez.movieinfo.presentation
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.davidmendozamartinez.movieinfo.databinding.ItemMovieBinding
 
-class MovieAdapter : ListAdapter<MovieUI, MovieAdapter.ViewHolder>(MovieDiffCallback()) {
+class MovieAdapter : PagingDataAdapter<MovieUI, MovieAdapter.ViewHolder>(MovieDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
@@ -15,7 +15,7 @@ class MovieAdapter : ListAdapter<MovieUI, MovieAdapter.ViewHolder>(MovieDiffCall
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
+        item?.let { holder.bind(it) }
     }
 
     class ViewHolder private constructor(
