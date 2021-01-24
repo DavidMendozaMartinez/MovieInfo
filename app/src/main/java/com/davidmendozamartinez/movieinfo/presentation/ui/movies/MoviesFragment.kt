@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.RecyclerView
 import com.davidmendozamartinez.movieinfo.databinding.FragmentMoviesBinding
 import kotlinx.coroutines.flow.collectLatest
@@ -17,6 +18,8 @@ class MoviesFragment : Fragment() {
     private var _binding: FragmentMoviesBinding? = null
     private val binding get() = _binding!!
     private val viewModel: MoviesViewModel by viewModel()
+
+    private val args: MoviesFragmentArgs by navArgs()
 
     private lateinit var recyclerView: RecyclerView
 
@@ -41,7 +44,7 @@ class MoviesFragment : Fragment() {
         }
         recyclerView.adapter = adapter
         lifecycleScope.launch {
-            viewModel.getPopularMovies().collectLatest {
+            viewModel.getMovies(args.section).collectLatest {
                 adapter.submitData(it)
             }
         }

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="min_touch_target_size">48dp</dimen>
+
+    <!--BottomAppBar-->
+    <dimen name="bottom_app_bar_fab_cradle_corner_radius">32dp</dimen>
+    <dimen name="bottom_app_bar_fab_cradle_margin">8dp</dimen>
+</resources>

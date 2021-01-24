@@ -9,6 +9,10 @@
         android:id="@+id/moviesFragment"
         android:name="com.davidmendozamartinez.movieinfo.presentation.ui.movies.MoviesFragment"
         tools:layout="@layout/fragment_movies">
+        <argument
+            android:name="section"
+            android:defaultValue="POPULAR"
+            app:argType="com.davidmendozamartinez.movieinfo.presentation.model.Section" />
         <action
             android:id="@+id/action_moviesFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
@@ -21,4 +25,10 @@
             android:name="movieId"
             app:argType="integer" />
     </fragment>
+    <action
+        android:id="@+id/action_global_moviesFragment"
+        app:destination="@+id/moviesFragment"
+        app:launchSingleTop="true"
+        app:popUpTo="@+id/navigation_graph"
+        app:popUpToInclusive="true" />
 </navigation>

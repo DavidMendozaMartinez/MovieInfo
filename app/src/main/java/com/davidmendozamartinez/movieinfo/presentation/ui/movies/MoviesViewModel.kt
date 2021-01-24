@@ -6,16 +6,19 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
 import com.davidmendozamartinez.movieinfo.domain.usecase.GetPopularMoviesUseCase
+import com.davidmendozamartinez.movieinfo.presentation.model.Section
 import com.davidmendozamartinez.movieinfo.presentation.model.MovieUI
 import com.davidmendozamartinez.movieinfo.presentation.model.toPresentation
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class MoviesViewModel(private val useCase: GetPopularMoviesUseCase) : ViewModel() {
+class MoviesViewModel(
+    private val useCase: GetPopularMoviesUseCase
+) : ViewModel() {
 
     private var movies: Flow<PagingData<MovieUI>>? = null
 
-    fun getPopularMovies(): Flow<PagingData<MovieUI>> {
+    fun getMovies(section: Section): Flow<PagingData<MovieUI>> {
         return movies ?: useCase.invoke()
             .map { pagingData ->
                 pagingData.map { it.toPresentation() }
