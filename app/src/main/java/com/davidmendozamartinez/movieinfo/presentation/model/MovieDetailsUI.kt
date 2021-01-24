@@ -8,14 +8,16 @@ class MovieDetailsUI(
     val genres: String,
     val id: Int,
     val overview: String?,
-    val posterUrl: String?,
+    val posterPath: String?,
     val data: String?,
     val revenue: Long,
     val tagline: String?,
     val title: String,
     val voteAverage: String,
     val voteCount: String
-)
+){
+    val posterUrl: String? get() = posterPath?.let { "https://image.tmdb.org/t/p/w500/$it" }
+}
 
 fun MovieDetailsDomain.toPresentation(): MovieDetailsUI =
     MovieDetailsUI(
@@ -24,7 +26,7 @@ fun MovieDetailsDomain.toPresentation(): MovieDetailsUI =
         genres.joinToString(", "),
         id,
         overview,
-        "https://image.tmdb.org/t/p/w500/$posterPath",
+        posterPath,
         "${releaseDate?.take(4) ?: ""} · ${runtime ?: ""}",
         revenue,
         tagline,

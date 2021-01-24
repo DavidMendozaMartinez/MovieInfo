@@ -11,131 +11,168 @@
             type="com.davidmendozamartinez.movieinfo.presentation.ui.details.DetailsViewModel" />
     </data>
 
-    <ScrollView
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/backdrop"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:scaleType="centerCrop"
-                app:imageFromUrl="@{ viewModel.movieDetails.backdropUrl }"
-                app:layout_constraintDimensionRatio="H,16:9"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="#D6000000"
-                app:tintMode="src_over"
-                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/poster"
-                android:layout_width="150dp"
-                android:layout_height="0dp"
-                android:layout_marginTop="48dp"
-                android:scaleType="centerCrop"
-                app:imageFromUrl="@{ viewModel.movieDetails.posterUrl }"
-                app:layout_constraintDimensionRatio="H,2:3"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/backgrounds/scenic" />
+                <ImageView
+                    android:id="@+id/backdrop"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:scaleType="centerCrop"
+                    app:imageFromUrl="@{ viewModel.movieDetails.backdropUrl }"
+                    app:layout_constraintDimensionRatio="H,16:9"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="#D6000000"
+                    app:tintMode="src_over"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="@{ viewModel.movieDetails.title }"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                app:layout_constraintEnd_toEndOf="@+id/poster"
-                app:layout_constraintStart_toStartOf="@+id/poster"
-                app:layout_constraintTop_toBottomOf="@+id/poster"
-                tools:text="Taxi Driver" />
+                <ImageView
+                    android:id="@+id/poster"
+                    android:layout_width="150dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="48dp"
+                    android:scaleType="centerCrop"
+                    app:imageFromUrl="@{ viewModel.movieDetails.posterUrl }"
+                    app:layout_constraintDimensionRatio="H,2:3"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-            <TextView
-                android:id="@+id/data"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@{ viewModel.movieDetails.data }"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                app:layout_constraintEnd_toEndOf="@+id/title"
-                app:layout_constraintStart_toStartOf="@+id/title"
-                app:layout_constraintTop_toBottomOf="@+id/title"
-                tools:text="1976 · 1 h 53 min" />
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="@{ viewModel.movieDetails.title }"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    app:layout_constraintEnd_toEndOf="@+id/poster"
+                    app:layout_constraintStart_toStartOf="@+id/poster"
+                    app:layout_constraintTop_toBottomOf="@+id/poster"
+                    tools:text="Taxi Driver" />
 
-            <TextView
-                android:id="@+id/voteAverage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="48dp"
-                android:layout_marginTop="16dp"
-                android:drawablePadding="8dp"
-                android:text="@{ viewModel.movieDetails.voteAverage }"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                app:drawableStartCompat="@drawable/ic_vote"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/data"
-                tools:text="82%" />
+                <TextView
+                    android:id="@+id/data"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@{ viewModel.movieDetails.data }"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    app:layout_constraintEnd_toEndOf="@+id/title"
+                    app:layout_constraintStart_toStartOf="@+id/title"
+                    app:layout_constraintTop_toBottomOf="@+id/title"
+                    tools:text="1976 · 1 h 53 min" />
 
-            <TextView
-                android:id="@+id/voteCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@{ viewModel.movieDetails.voteCount }"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                app:layout_constraintEnd_toEndOf="@+id/voteAverage"
-                app:layout_constraintStart_toStartOf="@+id/voteAverage"
-                app:layout_constraintTop_toBottomOf="@+id/voteAverage"
-                tools:text="7.714" />
+                <TextView
+                    android:id="@+id/voteAverage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="48dp"
+                    android:layout_marginTop="16dp"
+                    android:drawablePadding="8dp"
+                    android:text="@{ viewModel.movieDetails.voteAverage }"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    app:drawableStartCompat="@drawable/ic_vote"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/data"
+                    tools:text="82%" />
 
-            <TextView
-                android:id="@+id/tagline"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="48dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="48dp"
-                android:text="@{ viewModel.movieDetails.tagline }"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textStyle="italic"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/voteCount"
-                tools:text="On every street in every city, there's a nobody who dreams of being a somebody." />
+                <TextView
+                    android:id="@+id/voteCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@{ viewModel.movieDetails.voteCount }"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    app:layout_constraintEnd_toEndOf="@+id/voteAverage"
+                    app:layout_constraintStart_toStartOf="@+id/voteAverage"
+                    app:layout_constraintTop_toBottomOf="@+id/voteAverage"
+                    tools:text="7.714" />
 
-            <TextView
-                android:id="@+id/overviewLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Overview"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                app:layout_constraintStart_toStartOf="@+id/tagline"
-                app:layout_constraintTop_toBottomOf="@+id/tagline" />
+                <TextView
+                    android:id="@+id/tagline"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="48dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="48dp"
+                    android:text="@{ viewModel.movieDetails.tagline }"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textStyle="italic"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/voteCount"
+                    tools:text="On every street in every city, there's a nobody who dreams of being a somebody." />
 
-            <TextView
-                android:id="@+id/overview"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="80dp"
-                android:text="@{ viewModel.movieDetails.overview }"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/tagline"
-                app:layout_constraintStart_toStartOf="@+id/tagline"
-                app:layout_constraintTop_toBottomOf="@+id/overviewLabel"
-                tools:text="A mentally unstable Vietnam War veteran works as a night-time taxi driver in New York City where the perceived decadence and sleaze feed his urge for violent action, attempting to save a preadolescent prostitute in the process." />
+                <TextView
+                    android:id="@+id/overviewLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Overview"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    app:layout_constraintStart_toStartOf="@+id/tagline"
+                    app:layout_constraintTop_toBottomOf="@+id/tagline" />
+
+                <TextView
+                    android:id="@+id/overview"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="80dp"
+                    android:text="@{ viewModel.movieDetails.overview }"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/tagline"
+                    app:layout_constraintStart_toStartOf="@+id/tagline"
+                    app:layout_constraintTop_toBottomOf="@+id/overviewLabel"
+                    tools:text="A mentally unstable Vietnam War veteran works as a night-time taxi driver in New York City where the perceived decadence and sleaze feed his urge for violent action, attempting to save a preadolescent prostitute in the process." />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/buttonAddFavoriteMovie"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:onClick="@{() -> viewModel.addToFavorites(viewModel.movieDetails) }"
+            android:text="@string/add_to_favorites"
+            app:icon="@drawable/ic_favorite"
+            app:visible="@{ !viewModel.isFavorite() }"
+            tools:visibility="gone"/>
+
+        <Button
+            android:id="@+id/buttonRemoveFavoriteMovie"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@android:color/darker_gray"
+            android:onClick="@{() -> viewModel.removeFromFavorites(viewModel.movieDetails) }"
+            android:text="@string/remove_from_favorites"
+            app:icon="@drawable/ic_remove_favorite"
+            app:visible="@{ viewModel.isFavorite() }"
+            tools:visibility="gone" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

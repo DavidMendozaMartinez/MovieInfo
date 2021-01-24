@@ -20,19 +20,4 @@ data class MovieRemote(
     @SerializedName("vote_average") val voteAverage: Float
 )
 
-fun MovieRemote.toDomain(): MovieDomain = MovieDomain(
-    posterPath,
-    adult,
-    overview,
-    releaseDate,
-    genreIds,
-    id,
-    originalTitle,
-    originalLanguage,
-    title,
-    backdropPath,
-    popularity,
-    voteCount,
-    video,
-    voteAverage
-)
+fun MovieRemote.toDomain(): MovieDomain = MovieDomain(posterPath, id, title)

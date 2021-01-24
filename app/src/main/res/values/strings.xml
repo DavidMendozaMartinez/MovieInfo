@@ -5,4 +5,6 @@
     <string name="top_rated">Top rated</string>
     <string name="latest">Latest</string>
     <string name="favorites">Favorites</string>
+    <string name="add_to_favorites">Add to favorites</string>
+    <string name="remove_from_favorites">Remove from favorites</string>
 </resources>

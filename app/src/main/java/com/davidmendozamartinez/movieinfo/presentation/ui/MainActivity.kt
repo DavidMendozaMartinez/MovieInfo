@@ -1,11 +1,14 @@
 package com.davidmendozamartinez.movieinfo.presentation.ui
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.davidmendozamartinez.movieinfo.R
@@ -15,7 +18,7 @@ import com.davidmendozamartinez.movieinfo.presentation.ui.movies.MoviesFragmentD
 import com.davidmendozamartinez.movieinfo.presentation.util.getTranslucentColor
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedListener {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
@@ -29,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         navController = navHostFragment.navController
+        navController.addOnDestinationChangedListener(this)
 
         window.run { WindowCompat.setDecorFitsSystemWindows(this, false) }
         setupDrawer()
@@ -43,6 +47,7 @@ class MainActivity : AppCompatActivity() {
                 menuItem.isChecked = true
                 state = BottomSheetBehavior.STATE_HIDDEN
                 binding.bottomAppBarTitle.text = menuItem.title
+                binding.bottomAppBar.visibility = View.VISIBLE
 
                 findNavController(R.id.navHostFragment).navigate(
                     MoviesFragmentDirections.actionGlobalMoviesFragment(Section.parse(menuItem.itemId))
@@ -57,6 +62,43 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onStateChanged(bottomSheet: View, newState: Int) {
                     binding.scrim.isVisible = newState != BottomSheetBehavior.STATE_HIDDEN
+                }
+            })
+        }
+    }
+
+    override fun onDestinationChanged(
+        controller: NavController,
+        destination: NavDestination,
+        arguments: Bundle?
+    ) {
+        println()
+        when (destination.id) {
+            R.id.moviesFragment -> {
+                binding.bottomAppBar.visibility = View.VISIBLE
+                binding.bottomAppBar.performShow()
+                binding.fab.show()
+            }
+            R.id.detailsFragment -> {
+                hideBottomAppBar()
+                binding.fab.hide()
+            }
+        }
+    }
+
+    private fun hideBottomAppBar() {
+        binding.run {
+            bottomAppBar.performHide()
+            bottomAppBar.animate().setListener(object : AnimatorListenerAdapter() {
+                var isCanceled = false
+                override fun onAnimationEnd(animation: Animator?) {
+                    if (isCanceled) return
+                    bottomAppBar.visibility = View.GONE
+                    fab.visibility = View.INVISIBLE
+                }
+
+                override fun onAnimationCancel(animation: Animator?) {
+                    isCanceled = true
                 }
             })
         }
