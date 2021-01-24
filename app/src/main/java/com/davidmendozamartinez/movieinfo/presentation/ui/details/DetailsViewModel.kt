@@ -1,4 +1,4 @@
-package com.davidmendozamartinez.movieinfo.presentation.ui
+package com.davidmendozamartinez.movieinfo.presentation.ui.details
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -14,9 +14,9 @@ class DetailsViewModel(private val useCase: GetMovieDetailsUseCase) : ViewModel(
     private var _movieDetails: MutableLiveData<MovieDetailsUI> = MutableLiveData()
     val movieDetails: LiveData<MovieDetailsUI> get() = _movieDetails
 
-    fun getMovieDetails(id: Int) {
+    fun getMovieDetails(movieId: Int) {
         viewModelScope.launch {
-            _movieDetails.value = useCase.invoke(id).toPresentation()
+            _movieDetails.value = useCase.invoke(movieId).toPresentation()
         }
     }
 }

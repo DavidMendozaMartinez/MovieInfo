@@ -2,13 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".presentation.ui.DetailsActivity">
+    tools:context=".presentation.ui.details.DetailsFragment">
 
     <data>
 
         <variable
             name="viewModel"
-            type="com.davidmendozamartinez.movieinfo.presentation.ui.DetailsViewModel" />
+            type="com.davidmendozamartinez.movieinfo.presentation.ui.details.DetailsViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

@@ -1,4 +1,4 @@
-package com.davidmendozamartinez.movieinfo.presentation.ui
+package com.davidmendozamartinez.movieinfo.presentation.ui.movies
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,13 +11,9 @@ import com.davidmendozamartinez.movieinfo.presentation.model.toPresentation
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class MainViewModel(private val useCase: GetPopularMoviesUseCase) : ViewModel() {
+class MoviesViewModel(private val useCase: GetPopularMoviesUseCase) : ViewModel() {
 
     private var movies: Flow<PagingData<MovieUI>>? = null
-
-    init {
-        getPopularMovies()
-    }
 
     fun getPopularMovies(): Flow<PagingData<MovieUI>> {
         return movies ?: useCase.invoke()

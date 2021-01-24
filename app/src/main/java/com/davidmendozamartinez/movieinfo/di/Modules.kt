@@ -6,13 +6,13 @@ import com.davidmendozamartinez.movieinfo.data.repository.MovieRepositoryImpl
 import com.davidmendozamartinez.movieinfo.domain.repository.MovieRepository
 import com.davidmendozamartinez.movieinfo.domain.usecase.GetMovieDetailsUseCase
 import com.davidmendozamartinez.movieinfo.domain.usecase.GetPopularMoviesUseCase
-import com.davidmendozamartinez.movieinfo.presentation.ui.DetailsViewModel
-import com.davidmendozamartinez.movieinfo.presentation.ui.MainViewModel
+import com.davidmendozamartinez.movieinfo.presentation.ui.details.DetailsViewModel
+import com.davidmendozamartinez.movieinfo.presentation.ui.movies.MoviesViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val presentationModule = module {
-    viewModel { MainViewModel(get()) }
+    viewModel { MoviesViewModel(get()) }
     viewModel { DetailsViewModel(get()) }
 }
 

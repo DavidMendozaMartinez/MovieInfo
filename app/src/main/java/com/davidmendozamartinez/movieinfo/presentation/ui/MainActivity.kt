@@ -1,38 +1,31 @@
 package com.davidmendozamartinez.movieinfo.presentation.ui
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupActionBarWithNavController
+import com.davidmendozamartinez.movieinfo.R
 import com.davidmendozamartinez.movieinfo.databinding.ActivityMainBinding
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val viewModel: MainViewModel by viewModel()
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupList()
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
+        setupActionBarWithNavController(navController)
     }
 
-    private fun setupList() {
-        val adapter = MovieAdapter {
-            val intent = Intent(this, DetailsActivity::class.java)
-            intent.putExtra("id", it)
-            startActivity(intent)
-        }
-        binding.movieList.adapter = adapter
-        lifecycleScope.launch {
-            viewModel.getPopularMovies().collectLatest {
-                adapter.submitData(it)
-            }
-        }
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }

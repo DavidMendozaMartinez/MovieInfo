@@ -1,4 +1,4 @@
-package com.davidmendozamartinez.movieinfo.presentation.ui
+package com.davidmendozamartinez.movieinfo.presentation.ui.movies
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
