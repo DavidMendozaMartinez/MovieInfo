@@ -1,7 +1,7 @@
 package com.davidmendozamartinez.movieinfo.data.remote
 
 import com.davidmendozamartinez.movieinfo.BuildConfig
-import com.davidmendozamartinez.movieinfo.data.remote.model.GetPopularResponse
+import com.davidmendozamartinez.movieinfo.data.remote.model.GetMoviesReponse
 import com.davidmendozamartinez.movieinfo.data.remote.model.MovieDetailsRemote
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -33,10 +33,24 @@ interface TheMovieDBService {
 
     @GET(Routes.GET_POPULAR)
     suspend fun getPopular(
+        @Query("page") page: Int = 1,
+        @Query("api_key") apiKey: String = BuildConfig.THE_MOVIE_DB_API_KEY,
+        @Query("language") language: String = "en-US"
+    ): GetMoviesReponse
+
+    @GET(Routes.GET_TOP_RATED)
+    suspend fun getTopRated(
+        @Query("page") page: Int = 1,
         @Query("api_key") apiKey: String = BuildConfig.THE_MOVIE_DB_API_KEY,
         @Query("language") language: String = "en-US",
+    ): GetMoviesReponse
+
+    @GET(Routes.GET_UPCOMING)
+    suspend fun getUpcoming(
         @Query("page") page: Int = 1,
-    ): GetPopularResponse
+        @Query("api_key") apiKey: String = BuildConfig.THE_MOVIE_DB_API_KEY,
+        @Query("language") language: String = "en-US",
+    ): GetMoviesReponse
 
     @GET(Routes.GET_DETAILS)
     suspend fun getDetails(

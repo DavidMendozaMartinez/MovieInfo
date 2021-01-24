@@ -13,9 +13,9 @@
             android:title="@string/top_rated" />
 
         <item
-            android:id="@+id/latest"
-            android:icon="@drawable/ic_latest"
-            android:title="@string/latest" />
+            android:id="@+id/upcoming"
+            android:icon="@drawable/ic_upcoming"
+            android:title="@string/upcoming" />
 
         <item
             android:id="@+id/favorites"

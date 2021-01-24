@@ -7,7 +7,9 @@ import androidx.paging.cachedIn
 import androidx.paging.map
 import com.davidmendozamartinez.movieinfo.domain.model.MovieDomain
 import com.davidmendozamartinez.movieinfo.domain.usecase.GetFavoriteMoviesUseCase
+import com.davidmendozamartinez.movieinfo.domain.usecase.GetUpcomingMoviesUseCase
 import com.davidmendozamartinez.movieinfo.domain.usecase.GetPopularMoviesUseCase
+import com.davidmendozamartinez.movieinfo.domain.usecase.GetTopRatedMoviesUseCase
 import com.davidmendozamartinez.movieinfo.presentation.model.MovieUI
 import com.davidmendozamartinez.movieinfo.presentation.model.Section
 import com.davidmendozamartinez.movieinfo.presentation.model.toPresentation
@@ -16,6 +18,8 @@ import kotlinx.coroutines.flow.map
 
 class MoviesViewModel(
     private val getPopularMoviesUseCase: GetPopularMoviesUseCase,
+    private val getTopRatedMoviesUseCase: GetTopRatedMoviesUseCase,
+    private val getUpcomingMoviesUseCase: GetUpcomingMoviesUseCase,
     private val getFavoriteMoviesUseCase: GetFavoriteMoviesUseCase
 ) : ViewModel() {
 
@@ -25,8 +29,8 @@ class MoviesViewModel(
         val movies: Lazy<Flow<PagingData<MovieDomain>>> = lazy {
             when (section) {
                 Section.POPULAR -> getPopularMoviesUseCase.invoke()
-                Section.TOP_RATED -> getPopularMoviesUseCase.invoke()
-                Section.LATEST -> getPopularMoviesUseCase.invoke()
+                Section.TOP_RATED -> getTopRatedMoviesUseCase.invoke()
+                Section.UPCOMING -> getUpcomingMoviesUseCase.invoke()
                 Section.FAVORITES -> getFavoriteMoviesUseCase.invoke()
             }
         }

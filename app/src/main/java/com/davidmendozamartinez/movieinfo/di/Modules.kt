@@ -13,12 +13,14 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val presentationModule = module {
-    viewModel { MoviesViewModel(get(), get()) }
+    viewModel { MoviesViewModel(get(), get(), get(), get()) }
     viewModel { DetailsViewModel(get(), get(), get(), get()) }
 }
 
 val domainModule = module {
     single { GetPopularMoviesUseCase(get()) }
+    single { GetTopRatedMoviesUseCase(get()) }
+    single { GetUpcomingMoviesUseCase(get()) }
     single { GetMovieDetailsUseCase(get()) }
     single { GetFavoriteMoviesUseCase(get()) }
     single { IsFavoriteMovieUseCase(get()) }

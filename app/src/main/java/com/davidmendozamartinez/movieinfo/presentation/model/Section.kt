@@ -5,7 +5,7 @@ import com.davidmendozamartinez.movieinfo.R
 enum class Section(private val menuItemId: Int) {
     POPULAR(R.id.popular),
     TOP_RATED(R.id.top_rated),
-    LATEST(R.id.latest),
+    UPCOMING(R.id.upcoming),
     FAVORITES(R.id.favorites);
 
     companion object {

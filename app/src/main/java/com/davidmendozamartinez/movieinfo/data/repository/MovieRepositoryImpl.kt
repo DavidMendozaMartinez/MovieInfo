@@ -16,6 +16,12 @@ class MovieRepositoryImpl(
     override fun getPopularMovies(): Flow<PagingData<MovieDomain>> =
         remoteDataSource.getPopularMovies()
 
+    override fun getTopRatedMovies(): Flow<PagingData<MovieDomain>> =
+        remoteDataSource.getTopRatedMovies()
+
+    override fun getUpcomingMovies(): Flow<PagingData<MovieDomain>> =
+        remoteDataSource.getUpcomingMovies()
+
     override fun getFavoriteMovies(): Flow<PagingData<MovieDomain>> =
         localDataSource.getFavoriteMovies()
 
