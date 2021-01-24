@@ -50,7 +50,8 @@
             app:fabAlignmentMode="center"
             app:fabCradleMargin="@dimen/bottom_app_bar_fab_cradle_margin"
             app:fabCradleRoundedCornerRadius="@dimen/bottom_app_bar_fab_cradle_corner_radius"
-            app:hideOnScroll="true">
+            app:hideOnScroll="true"
+            app:menu="@menu/bottom_app_bar">
 
             <LinearLayout
                 android:id="@+id/bottomAppBarContentContainer"
@@ -69,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     app:srcCompat="@drawable/ic_arrow_drop_up"
-                    app:tint="?attr/colorOnPrimarySurface" />
+                    app:tint="?attr/colorOnSurface" />
 
                 <TextView
                     android:id="@+id/bottomAppBarTitle"
@@ -79,7 +80,7 @@
                     android:layout_marginHorizontal="8dp"
                     android:text="@string/popular"
                     android:textAppearance="?attr/textAppearanceBody1"
-                    android:textColor="?attr/colorControlNormal" />
+                    android:textColor="?attr/colorOnSurface" />
 
             </LinearLayout>
 

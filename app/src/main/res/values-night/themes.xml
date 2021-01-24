@@ -1,16 +1,25 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.MovieInfo.Dark" parent="Theme.MovieInfo">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
+
+    <style name="Theme.MovieInfo" parent="Base.Theme.MovieInfo">
+        <!--Color (light theme) -->
+        <item name="colorPrimary">@color/red_300</item>
+        <item name="colorPrimaryVariant">@color/red_700</item>
+        <item name="colorSecondary">@color/red_300</item>
+        <item name="colorSecondaryVariant">@color/red_700</item>
+
+        <item name="android:colorBackground">@color/black_800</item>
+        <item name="colorSurface">@color/black_800</item>
+        <item name="colorError">@color/red_200</item>
+
+        <item name="colorOnPrimary">@color/black_900</item>
+        <item name="colorOnSecondary">@color/black_900</item>
+        <item name="colorOnBackground">@color/white_50</item>
+        <item name="colorOnSurface">@color/white_50</item>
+        <item name="colorOnError">@color/black_900</item>
+
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+        <item name="android:statusBarColor" tools:targetApi="l">@color/black_900_alpha_060</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 </resources>

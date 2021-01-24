@@ -39,7 +39,6 @@ class MovieAdapter(private val clickListener: (Int) -> Unit) :
         }
 
         fun bind(item: MovieUI) {
-            binding.title.text = item.title
             binding.poster.bindImageFromUrl(item.posterUrl)
         }
     }
