@@ -9,7 +9,8 @@ import com.davidmendozamartinez.movieinfo.databinding.ItemMovieBinding
 import com.davidmendozamartinez.movieinfo.presentation.model.MovieUI
 import com.davidmendozamartinez.movieinfo.presentation.util.bindImageFromUrl
 
-class MovieAdapter : PagingDataAdapter<MovieUI, MovieAdapter.ViewHolder>(MovieDiffCallback()) {
+class MovieAdapter(private val clickListener: (Int) -> Unit) :
+    PagingDataAdapter<MovieUI, MovieAdapter.ViewHolder>(MovieDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
@@ -17,7 +18,12 @@ class MovieAdapter : PagingDataAdapter<MovieUI, MovieAdapter.ViewHolder>(MovieDi
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        item?.let { holder.bind(it) }
+        item?.let { movie ->
+            holder.bind(movie)
+            holder.itemView.setOnClickListener {
+                clickListener(movie.id)
+            }
+        }
     }
 
     class ViewHolder private constructor(

@@ -4,5 +4,5 @@ object Routes {
     const val THE_MOVIE_DB_API_BASE_URL = "https://api.themoviedb.org/3/"
 
     const val GET_POPULAR = "movie/popular"
-    const val GET_DETAILS = "movie/{id}/"
+    const val GET_DETAILS = "movie/{id}"
 }

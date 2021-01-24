@@ -1,5 +1,6 @@
 package com.davidmendozamartinez.movieinfo.presentation.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -22,7 +23,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupList() {
-        val adapter = MovieAdapter()
+        val adapter = MovieAdapter {
+            val intent = Intent(this, DetailsActivity::class.java)
+            intent.putExtra("id", it)
+            startActivity(intent)
+        }
         binding.movieList.adapter = adapter
         lifecycleScope.launch {
             viewModel.getPopularMovies().collectLatest {

@@ -7,8 +7,8 @@
     <data>
 
         <variable
-            name="movieDetails"
-            type="com.davidmendozamartinez.movieinfo.presentation.model.MovieDetailsUI" />
+            name="viewModel"
+            type="com.davidmendozamartinez.movieinfo.presentation.ui.DetailsViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -28,13 +28,14 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:scaleType="centerCrop"
-                    app:imageFromUrl="@{ movieDetails.backdropUrl }"
+                    app:imageFromUrl="@{ viewModel.movieDetails.backdropUrl }"
                     app:layout_constraintDimensionRatio="H,16:9"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:srcCompat="@tools:sample/backgrounds/scenic"
-                    tools:tint="#D6000000" />
+                    app:tint="#D6000000"
+                    app:tintMode="src_over"
+                    tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
                 <ImageView
                     android:id="@+id/poster"
@@ -42,7 +43,7 @@
                     android:layout_height="0dp"
                     android:layout_marginTop="48dp"
                     android:scaleType="centerCrop"
-                    app:imageFromUrl="@{ movieDetails.posterUrl }"
+                    app:imageFromUrl="@{ viewModel.movieDetails.posterUrl }"
                     app:layout_constraintDimensionRatio="H,2:3"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +55,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
-                    android:text="@{ movieDetails.title }"
+                    android:text="@{ viewModel.movieDetails.title }"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     app:layout_constraintEnd_toEndOf="@+id/poster"
                     app:layout_constraintStart_toStartOf="@+id/poster"
@@ -66,7 +67,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="@{ movieDetails.data }"
+                    android:text="@{ viewModel.movieDetails.data }"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     app:layout_constraintEnd_toEndOf="@+id/title"
                     app:layout_constraintStart_toStartOf="@+id/title"
@@ -80,7 +81,7 @@
                     android:layout_marginStart="48dp"
                     android:layout_marginTop="16dp"
                     android:drawablePadding="8dp"
-                    android:text="@{ movieDetails.voteAverage }"
+                    android:text="@{ viewModel.movieDetails.voteAverage }"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     app:drawableStartCompat="@drawable/ic_vote"
                     app:layout_constraintStart_toStartOf="parent"
@@ -92,7 +93,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="@{ movieDetails.voteCount }"
+                    android:text="@{ viewModel.movieDetails.voteCount }"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     app:layout_constraintEnd_toEndOf="@+id/voteAverage"
                     app:layout_constraintStart_toStartOf="@+id/voteAverage"
@@ -106,7 +107,7 @@
                     android:layout_marginStart="48dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="48dp"
-                    android:text="@{ movieDetails.tagline }"
+                    android:text="@{ viewModel.movieDetails.tagline }"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textStyle="italic"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -130,7 +131,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="80dp"
-                    android:text="@{ movieDetails.overview }"
+                    android:text="@{ viewModel.movieDetails.overview }"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/tagline"

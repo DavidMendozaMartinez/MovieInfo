@@ -4,17 +4,17 @@ import com.davidmendozamartinez.movieinfo.domain.model.MovieDetailsDomain
 
 class MovieDetailsUI(
     val backdropUrl: String?,
-    val budget: Int,
+    val budget: Long,
     val genres: String,
-    val id: Int,//
+    val id: Int,
     val overview: String?,
     val posterUrl: String?,
     val data: String?,
-    val revenue: Int,
+    val revenue: Long,
     val tagline: String?,
     val title: String,
     val voteAverage: String,
-    val voteCount: Int//
+    val voteCount: String
 )
 
 fun MovieDetailsDomain.toPresentation(): MovieDetailsUI =
@@ -30,5 +30,5 @@ fun MovieDetailsDomain.toPresentation(): MovieDetailsUI =
         tagline,
         title,
         "${voteAverage * 10}%",
-        voteCount
+        voteCount.toString()
     )

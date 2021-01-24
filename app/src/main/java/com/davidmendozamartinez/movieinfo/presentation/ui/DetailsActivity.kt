@@ -1,12 +1,22 @@
 package com.davidmendozamartinez.movieinfo.presentation.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.davidmendozamartinez.movieinfo.R
+import androidx.appcompat.app.AppCompatActivity
+import com.davidmendozamartinez.movieinfo.databinding.ActivityDetailsBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailsActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityDetailsBinding
+    private val viewModel: DetailsViewModel by viewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_details)
+        binding = ActivityDetailsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+
+        viewModel.getMovieDetails(intent.extras?.getInt("id")!!)
     }
 }

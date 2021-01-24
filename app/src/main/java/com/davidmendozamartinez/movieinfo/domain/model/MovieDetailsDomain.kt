@@ -3,7 +3,7 @@ package com.davidmendozamartinez.movieinfo.domain.model
 data class MovieDetailsDomain(
     val adult: Boolean,
     val backdropPath: String?,
-    val budget: Int,
+    val budget: Long,
     val genres: List<String>,
     val homepage: String?,
     val id: Int,
@@ -14,7 +14,7 @@ data class MovieDetailsDomain(
     val popularity: Float,
     val posterPath: String?,
     val releaseDate: String?,
-    val revenue: Int,
+    val revenue: Long,
     val runtime: Int?,
     val status: String,
     val tagline: String?,
