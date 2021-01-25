@@ -17,4 +17,5 @@
 
     <!-- SearchFragment -->
     <string name="hint_search_movie">Search movie</string>
+    <string name="button_clear_search_content_description">Clear search</string>
 </resources>

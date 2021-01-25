@@ -15,16 +15,13 @@ class DetailsFragment : Fragment() {
 
     private var _binding: FragmentDetailsBinding? = null
     private val binding: FragmentDetailsBinding get() = _binding!!
-    private val viewModel: DetailsViewModel by viewModel()
 
+    private val viewModel: DetailsViewModel by viewModel()
     private var movieId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        arguments?.let {
-            movieId = it.getInt(MOVIE_ID)
-        }
+        arguments?.let { movieId = it.getInt(MOVIE_ID) }
     }
 
     override fun onCreateView(

@@ -3,7 +3,9 @@ package com.davidmendozamartinez.movieinfo.presentation.util
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.app.Activity
+import android.content.Context
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.core.view.*
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -67,5 +69,19 @@ fun View.setStatusBarPadding() {
         val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
         view.updatePadding(top = initial + systemBars.top)
         insets
+    }
+}
+
+fun View.hideIme() {
+    with(context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager) {
+        clearFocus()
+        hideSoftInputFromWindow(windowToken, 0)
+    }
+}
+
+fun View.showIme() {
+    with(context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager) {
+        requestFocus()
+        showSoftInput(this@showIme, 0)
     }
 }

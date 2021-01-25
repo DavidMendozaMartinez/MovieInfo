@@ -28,9 +28,11 @@ class DetailsViewModel(
     val isFavorite: LiveData<Boolean> get() = _isFavorite
 
     fun getMovieDetails(movieId: Int) {
-        viewModelScope.launch {
-            _isFavorite.value = isFavoriteMovieUseCase.invoke(movieId)
-            _movieDetails.value = getMovieDetailsUseCase.invoke(movieId).toPresentation()
+        if (_movieDetails.value == null || _isFavorite.value == null) {
+            viewModelScope.launch {
+                _isFavorite.value = isFavoriteMovieUseCase.invoke(movieId)
+                _movieDetails.value = getMovieDetailsUseCase.invoke(movieId).toPresentation()
+            }
         }
     }
 

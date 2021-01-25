@@ -2,7 +2,10 @@
 <resources>
     <dimen name="min_touch_target_size">48dp</dimen>
 
-    <!--BottomAppBar-->
+    <!-- MainActivity -->
     <dimen name="bottom_app_bar_fab_cradle_corner_radius">32dp</dimen>
     <dimen name="bottom_app_bar_fab_cradle_margin">8dp</dimen>
+
+    <!-- SearchFragment -->
+    <dimen name="searcher_height">48dp</dimen>
 </resources>
