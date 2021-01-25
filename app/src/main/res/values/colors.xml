@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="red_100">#FCCAD2</color>
-    <color name="red_200">#FFF297A2</color>
-    <color name="red_300">#FFEA6D7E</color>
-    <color name="red_700">#FFDD0D3C</color>
-    <color name="red_800">#FFD00036</color>
-    <color name="red_900">#FFC20029</color>
+    <color name="red_200">#FFEC949A</color>
+    <color name="red_300">#FFE16973</color>
+    <color name="red_700">#FFCF0F31</color>
+    <color name="red_800">#FFC20029</color>
+    <color name="red_900">#FFB4001E</color>
 
     <color name="white_50">#FFFFFFFF</color>
-    <color name="white_50_alpha_060">#99ffffff</color>
+    <color name="white_200">#F0F0F0</color>
+    <color name="white_200_alpha_060">#99F0F0F0</color>
 
-    <color name="black_800">#121212</color>
+    <color name="black_800">#FF262626</color>
     <color name="black_900">#FF000000</color>
     <color name="black_900_alpha_060">#99000000</color>
 </resources>
