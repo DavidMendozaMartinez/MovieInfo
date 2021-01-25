@@ -47,6 +47,16 @@ class MovieRemoteDataSource(private val service: TheMovieDBService) {
             pagingSourceFactory = { MoviePagingSource(service, Routes.GET_UPCOMING) }
         ).flow
 
+    fun searchMovies(query: String): Flow<PagingData<MovieDomain>> =
+        Pager(
+            config = PagingConfig(
+                pageSize = PAGE_SIZE,
+                maxSize = MAX_SIZE,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = { MoviePagingSource(service, Routes.SEARCH_MOVIES, query) }
+        ).flow
+
     suspend fun getMovieDetails(id: Int): MovieDetailsDomain =
         service.getDetails(id).toDomain()
 }

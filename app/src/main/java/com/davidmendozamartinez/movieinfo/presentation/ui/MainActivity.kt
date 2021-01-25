@@ -2,12 +2,9 @@ package com.davidmendozamartinez.movieinfo.presentation.ui
 
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.WindowCompat
-import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
@@ -15,15 +12,22 @@ import com.davidmendozamartinez.movieinfo.R
 import com.davidmendozamartinez.movieinfo.databinding.ActivityMainBinding
 import com.davidmendozamartinez.movieinfo.presentation.model.Section
 import com.davidmendozamartinez.movieinfo.presentation.ui.movies.MoviesFragmentDirections
-import com.davidmendozamartinez.movieinfo.presentation.util.getTranslucentColor
+import com.davidmendozamartinez.movieinfo.presentation.ui.search.SearchFragmentDirections
 import com.davidmendozamartinez.movieinfo.presentation.util.hide
+import com.davidmendozamartinez.movieinfo.presentation.util.setFullScreen
+import com.davidmendozamartinez.movieinfo.presentation.util.setScrimAnimation
+import com.davidmendozamartinez.movieinfo.presentation.util.show
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity(),
+    NavController.OnDestinationChangedListener,
     NavigationView.OnNavigationItemSelectedListener,
-    Toolbar.OnMenuItemClickListener,
-    NavController.OnDestinationChangedListener {
+    Toolbar.OnMenuItemClickListener {
+
+    companion object {
+        private const val KEY_SECTION_TITLE = "section_title_key"
+    }
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
@@ -31,49 +35,76 @@ class MainActivity : AppCompatActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
-        navController = navHostFragment.navController
-        navController.addOnDestinationChangedListener(this)
+        savedInstanceState?.let {
+            binding.bottomAppBarTitle.text = savedInstanceState.getString(
+                KEY_SECTION_TITLE,
+                getString(Section.POPULAR.stringResId)
+            )
+        }
 
-        WindowCompat.setDecorFitsSystemWindows(window, false)
+        setFullScreen()
+        setupNavController()
+        setupFab()
         setupBottomAppBar()
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(KEY_SECTION_TITLE, binding.bottomAppBarTitle.text.toString())
+    }
+
+    private fun setupNavController() {
+        (supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment).let {
+            navController = it.navController
+            navController.addOnDestinationChangedListener(this)
+        }
+    }
+
+    private fun setupFab() {
+        binding.fab.setOnClickListener {
+            navigateToSearch()
+        }
+    }
+
     private fun setupBottomAppBar() {
-        bottomSheetBehavior = BottomSheetBehavior.from(binding.navigationView)
-        binding.bottomSheetBehavior = bottomSheetBehavior
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        binding.bottomAppBar.setOnMenuItemClickListener(this)
+        binding.navigationView.setNavigationItemSelectedListener(this)
 
-        binding.bottomAppBar.setOnMenuItemClickListener(this@MainActivity)
-        binding.navigationView.setNavigationItemSelectedListener(this@MainActivity)
+        with(BottomSheetBehavior.from(binding.navigationView)) {
+            bottomSheetBehavior = this
+            binding.bottomSheetBehavior = this
+            hide()
+            setScrimAnimation(binding.scrim)
+        }
+    }
 
-        bottomSheetBehavior.addBottomSheetCallback(object :
-            BottomSheetBehavior.BottomSheetCallback() {
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                binding.scrim.setBackgroundColor(getTranslucentColor(slideOffset))
+    override fun onDestinationChanged(
+        controller: NavController, destination: NavDestination, arguments: Bundle?
+    ) {
+        when (destination.id) {
+            R.id.moviesFragment -> {
+                binding.bottomAppBar.show()
+                binding.fab.show()
             }
-
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-                binding.scrim.isVisible = newState != BottomSheetBehavior.STATE_HIDDEN
+            R.id.detailsFragment, R.id.searchFragment -> {
+                binding.bottomAppBar.hide()
+                binding.fab.hide()
             }
-        })
+        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        item.isChecked = true
+        bottomSheetBehavior.hide()
 
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-        binding.bottomAppBarTitle.text = item.title
-        binding.bottomAppBar.visibility = View.VISIBLE
-
-        navController.navigate(
-            MoviesFragmentDirections.actionGlobalMoviesFragment(Section.parse(item.itemId))
-        )
+        binding.bottomAppBarTitle.let { currentTitle ->
+            if (currentTitle.text != item.title) {
+                currentTitle.text = item.title
+                navigateToHome(Section.parse(item.itemId))
+            }
+        }
         return true
     }
 
@@ -86,21 +117,11 @@ class MainActivity : AppCompatActivity(),
         return true
     }
 
-    override fun onDestinationChanged(
-        controller: NavController,
-        destination: NavDestination,
-        arguments: Bundle?
-    ) {
-        when (destination.id) {
-            R.id.moviesFragment -> {
-                binding.bottomAppBar.visibility = View.VISIBLE
-                binding.bottomAppBar.performShow()
-                binding.fab.show()
-            }
-            R.id.detailsFragment -> {
-                binding.bottomAppBar.hide()
-                binding.fab.hide()
-            }
-        }
+    private fun navigateToHome(section: Section) {
+        navController.navigate(MoviesFragmentDirections.actionGlobalMoviesFragment(section))
+    }
+
+    private fun navigateToSearch() {
+        navController.navigate(SearchFragmentDirections.actionGlobalSearchFragment())
     }
 }

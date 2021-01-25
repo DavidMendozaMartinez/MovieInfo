@@ -8,20 +8,19 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.RecyclerView
 import com.davidmendozamartinez.movieinfo.databinding.FragmentMoviesBinding
+import com.davidmendozamartinez.movieinfo.presentation.ui.adapter.MovieAdapter
+import com.davidmendozamartinez.movieinfo.presentation.util.setStatusBarPadding
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MoviesFragment : Fragment() {
     private var _binding: FragmentMoviesBinding? = null
-    private val binding get() = _binding!!
+    private val binding: FragmentMoviesBinding get() = _binding!!
+
     private val viewModel: MoviesViewModel by viewModel()
-
     private val args: MoviesFragmentArgs by navArgs()
-
-    private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,21 +32,25 @@ class MoviesFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        recyclerView = binding.recyclerView
         setupList()
     }
 
     private fun setupList() {
-        val adapter = MovieAdapter {
-            val action = MoviesFragmentDirections.actionMoviesFragmentToDetailsFragment(it)
-            findNavController().navigate(action)
-        }
-        recyclerView.adapter = adapter
+        val adapter = MovieAdapter { navigateToDetails(it) }
+        binding.listContainer.recyclerView.adapter = adapter
+        binding.listContainer.recyclerView.setStatusBarPadding()
+
         lifecycleScope.launch {
             viewModel.getMovies(args.section).collectLatest {
                 adapter.submitData(it)
             }
         }
+    }
+
+    private fun navigateToDetails(movieId: Int) {
+        findNavController().navigate(
+            MoviesFragmentDirections.actionMoviesFragmentToDetailsFragment(movieId)
+        )
     }
 
     override fun onDestroyView() {

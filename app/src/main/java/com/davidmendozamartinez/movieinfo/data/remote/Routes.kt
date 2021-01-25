@@ -6,5 +6,6 @@ object Routes {
     const val GET_POPULAR = "movie/popular"
     const val GET_TOP_RATED = "movie/top_rated"
     const val GET_UPCOMING = "movie/upcoming"
+    const val SEARCH_MOVIES = "search/movie"
     const val GET_DETAILS = "movie/{id}"
 }

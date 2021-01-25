@@ -5,21 +5,21 @@
             android:id="@+id/popular"
             android:checked="true"
             android:icon="@drawable/ic_popular"
-            android:title="@string/popular" />
+            android:title="@string/nav_drawer_popular" />
 
         <item
             android:id="@+id/top_rated"
             android:icon="@drawable/ic_vote"
-            android:title="@string/top_rated" />
+            android:title="@string/nav_drawer_top_rated" />
 
         <item
             android:id="@+id/upcoming"
             android:icon="@drawable/ic_upcoming"
-            android:title="@string/upcoming" />
+            android:title="@string/nav_drawer_upcoming" />
 
         <item
             android:id="@+id/favorites"
             android:icon="@drawable/ic_favorite"
-            android:title="@string/favorites" />
+            android:title="@string/nav_drawer_favorites" />
     </group>
 </menu>

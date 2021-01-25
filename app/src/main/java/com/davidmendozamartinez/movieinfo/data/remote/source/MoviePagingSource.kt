@@ -13,7 +13,8 @@ private const val THE_MOVIE_DB_STARTING_PAGE_INDEX = 1
 
 class MoviePagingSource(
     private val service: TheMovieDBService,
-    private val route: String
+    private val route: String,
+    private val query: String = ""
 ) : PagingSource<Int, MovieDomain>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MovieDomain> {
@@ -24,6 +25,7 @@ class MoviePagingSource(
                 Routes.GET_POPULAR -> service.getPopular(page)
                 Routes.GET_TOP_RATED -> service.getTopRated(page)
                 Routes.GET_UPCOMING -> service.getUpcoming(page)
+                Routes.SEARCH_MOVIES -> service.searchMovies(query, page)
                 else -> GetMoviesReponse(0, emptyList(), 0, 0)
             }
 

@@ -14,7 +14,7 @@ class DetailsFragment : Fragment() {
     }
 
     private var _binding: FragmentDetailsBinding? = null
-    private val binding get() = _binding!!
+    private val binding: FragmentDetailsBinding get() = _binding!!
     private val viewModel: DetailsViewModel by viewModel()
 
     private var movieId: Int = 0

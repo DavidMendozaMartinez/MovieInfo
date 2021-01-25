@@ -1,10 +1,20 @@
 <resources>
     <string name="app_name">MovieInfo</string>
 
-    <string name="popular">Popular</string>
-    <string name="top_rated">Top rated</string>
-    <string name="upcoming">Upcoming</string>
-    <string name="favorites">Favorites</string>
-    <string name="add_to_favorites">Add to favorites</string>
-    <string name="remove_from_favorites">Remove from favorites</string>
+    <!-- Navigation drawer item titles -->
+    <string name="nav_drawer_popular">Popular</string>
+    <string name="nav_drawer_top_rated">Top rated</string>
+    <string name="nav_drawer_upcoming">Upcoming</string>
+    <string name="nav_drawer_favorites">Favorites</string>
+
+    <!-- MoviesFragment -->
+    <string name="fab_content_description_search_movie">Search movie</string>
+
+    <!-- DetailsFragment -->
+    <string name="label_overview">Overview</string>
+    <string name="button_add_to_favorites">Add to favorites</string>
+    <string name="button_remove_from_favorites">Remove from favorites</string>
+
+    <!-- SearchFragment -->
+    <string name="hint_search_movie">Search movie</string>
 </resources>

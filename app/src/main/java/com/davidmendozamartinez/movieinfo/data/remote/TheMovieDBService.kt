@@ -52,6 +52,14 @@ interface TheMovieDBService {
         @Query("language") language: String = "en-US",
     ): GetMoviesReponse
 
+    @GET(Routes.SEARCH_MOVIES)
+    suspend fun searchMovies(
+        @Query("query") query: String,
+        @Query("page") page: Int = 1,
+        @Query("api_key") apiKey: String = BuildConfig.THE_MOVIE_DB_API_KEY,
+        @Query("language") language: String = "en-US",
+    ): GetMoviesReponse
+
     @GET(Routes.GET_DETAILS)
     suspend fun getDetails(
         @Path("id") id: Int,

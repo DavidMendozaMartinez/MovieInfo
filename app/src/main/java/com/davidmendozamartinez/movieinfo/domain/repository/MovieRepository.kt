@@ -10,6 +10,7 @@ interface MovieRepository {
     fun getTopRatedMovies(): Flow<PagingData<MovieDomain>>
     fun getUpcomingMovies(): Flow<PagingData<MovieDomain>>
     fun getFavoriteMovies(): Flow<PagingData<MovieDomain>>
+    fun searchMovies(query: String): Flow<PagingData<MovieDomain>>
     suspend fun addFavoriteMovie(movie: MovieDomain)
     suspend fun removeFavoriteMovie(movie: MovieDomain)
     suspend fun isFavoriteMovie(id: Int): Boolean

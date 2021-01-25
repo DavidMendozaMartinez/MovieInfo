@@ -9,12 +9,14 @@ import com.davidmendozamartinez.movieinfo.domain.repository.MovieRepository
 import com.davidmendozamartinez.movieinfo.domain.usecase.*
 import com.davidmendozamartinez.movieinfo.presentation.ui.details.DetailsViewModel
 import com.davidmendozamartinez.movieinfo.presentation.ui.movies.MoviesViewModel
+import com.davidmendozamartinez.movieinfo.presentation.ui.search.SearchViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val presentationModule = module {
     viewModel { MoviesViewModel(get(), get(), get(), get()) }
     viewModel { DetailsViewModel(get(), get(), get(), get()) }
+    viewModel { SearchViewModel(get()) }
 }
 
 val domainModule = module {
@@ -23,6 +25,7 @@ val domainModule = module {
     single { GetUpcomingMoviesUseCase(get()) }
     single { GetMovieDetailsUseCase(get()) }
     single { GetFavoriteMoviesUseCase(get()) }
+    single { SearchMoviesUseCase(get()) }
     single { IsFavoriteMovieUseCase(get()) }
     single { AddFavoriteMovieUseCase(get()) }
     single { RemoveFavoriteMovieUseCase(get()) }

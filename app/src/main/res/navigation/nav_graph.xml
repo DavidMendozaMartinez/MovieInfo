@@ -25,9 +25,24 @@
             android:name="movieId"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.davidmendozamartinez.movieinfo.presentation.ui.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
     <action
         android:id="@+id/action_global_moviesFragment"
         app:destination="@+id/moviesFragment"
+        app:launchSingleTop="true"
+        app:popUpTo="@+id/navigation_graph"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/action_global_searchFragment"
+        app:destination="@+id/searchFragment"
         app:launchSingleTop="true"
         app:popUpTo="@+id/navigation_graph"
         app:popUpToInclusive="true" />

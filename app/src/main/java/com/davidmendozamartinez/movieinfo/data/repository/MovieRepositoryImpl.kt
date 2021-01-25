@@ -25,6 +25,9 @@ class MovieRepositoryImpl(
     override fun getFavoriteMovies(): Flow<PagingData<MovieDomain>> =
         localDataSource.getFavoriteMovies()
 
+    override fun searchMovies(query: String): Flow<PagingData<MovieDomain>> =
+        remoteDataSource.searchMovies(query)
+
     override suspend fun addFavoriteMovie(movie: MovieDomain) =
         localDataSource.addFavoriteMovie(movie)
 
