@@ -18,6 +18,8 @@
         <item name="colorOnSurface">@color/white_50</item>
         <item name="colorOnError">@color/black_900</item>
 
+        <item name="colorOnSurfaceAlpha">@color/white_50_alpha_010</item>
+
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/black_900_alpha_060</item>
         <item name="android:windowLightStatusBar">false</item>

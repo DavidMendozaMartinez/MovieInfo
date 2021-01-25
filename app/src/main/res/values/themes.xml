@@ -21,6 +21,21 @@
         <item name="colorOnError">@color/white_50</item>
 
         <item name="colorControlNormal">?attr/colorOnSurface</item>
+        <item name="colorOnSurfaceAlpha">@color/black_900_alpha_010</item>
+
+        <!--Typography-->
+        <item name="textAppearanceHeadline2">@style/TextAppearance.MovieInfo.Headline2</item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.MovieInfo.Headline3</item>
+        <item name="textAppearanceHeadline4">@style/TextAppearance.MovieInfo.Headline4</item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.MovieInfo.Headline5</item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.MovieInfo.Headline6</item>
+        <item name="textAppearanceSubtitle1">@style/TextAppearance.MovieInfo.Subtitle1</item>
+        <item name="textAppearanceSubtitle2">@style/TextAppearance.MovieInfo.Subtitle2</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.MovieInfo.Body1</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.MovieInfo.Body2</item>
+        <item name="textAppearanceButton">@style/TextAppearance.MovieInfo.Button</item>
+        <item name="textAppearanceCaption">@style/TextAppearance.MovieInfo.Caption</item>
+        <item name="textAppearanceOverline">@style/TextAppearance.MovieInfo.Overline</item>
 
         <!-- Shape. -->
         <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.MovieInfo.SmallComponent</item>

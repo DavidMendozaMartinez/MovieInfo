@@ -7,10 +7,12 @@
     <color name="red_900">#FFB4001E</color>
 
     <color name="white_50">#FFFFFFFF</color>
+    <color name="white_50_alpha_010">#1AFFFFFF</color>
     <color name="white_200">#F0F0F0</color>
     <color name="white_200_alpha_060">#99F0F0F0</color>
 
     <color name="black_800">#FF262626</color>
     <color name="black_900">#FF000000</color>
+    <color name="black_900_alpha_010">#1A000000</color>
     <color name="black_900_alpha_060">#99000000</color>
 </resources>

@@ -38,6 +38,15 @@
                     app:tintMode="src_over"
                     tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
+                <ProgressBar
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    app:layout_constraintTop_toBottomOf="@id/backdrop"
+                    app:visible="@{ viewModel.movieDetails == null }"
+                    tools:visibility="gone" />
+
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/poster"
                     android:layout_width="150dp"
@@ -54,77 +63,102 @@
                         android:importantForAccessibility="no"
                         android:scaleType="centerCrop"
                         app:imageFromUrl="@{ viewModel.movieDetails.posterUrl }"
+                        app:loadingPlaceholder="@{ viewModel.movieDetails }"
                         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
                 </com.google.android.material.card.MaterialCardView>
 
                 <TextView
                     android:id="@+id/title"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="48dp"
                     android:layout_marginTop="24dp"
+                    android:gravity="center"
+                    android:maxLines="2"
                     android:text="@{ viewModel.movieDetails.title }"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    app:layout_constraintEnd_toEndOf="@+id/poster"
-                    app:layout_constraintStart_toStartOf="@+id/poster"
+                    android:textAppearance="?attr/textAppearanceHeadline4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/poster"
+                    app:loadingPlaceholder="@{ viewModel.movieDetails }"
                     tools:text="Taxi Driver" />
 
                 <TextView
                     android:id="@+id/data"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="48dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginEnd="48dp"
+                    android:gravity="center"
                     android:text="@{ viewModel.movieDetails.data }"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    app:layout_constraintEnd_toEndOf="@+id/title"
-                    app:layout_constraintStart_toStartOf="@+id/title"
+                    android:textAppearance="?attr/textAppearanceSubtitle2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/title"
+                    app:loadingPlaceholder="@{ viewModel.movieDetails }"
                     tools:text="1976 · 1 h 53 min" />
 
-                <ProgressBar
-                    android:id="@+id/average"
-                    style="?android:progressBarStyleHorizontal"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:indeterminate="false"
-                    android:indeterminateBehavior="cycle"
-                    android:padding="6dp"
-                    android:progress="@{ viewModel.movieDetails.voteAverage }"
-                    android:progressDrawable="@drawable/progress_circle"
+                <TextView
+                    android:id="@+id/genres"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="48dp"
+                    android:layout_marginEnd="24dp"
+                    android:text="@{ viewModel.movieDetails.genres }"
+                    android:textAppearance="?attr/textAppearanceSubtitle1"
                     app:layout_constraintBottom_toBottomOf="@+id/voteAverage"
-                    app:layout_constraintEnd_toEndOf="@+id/voteAverage"
-                    app:layout_constraintStart_toStartOf="@+id/voteAverage"
+                    app:layout_constraintEnd_toStartOf="@+id/voteAverage"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/voteAverage"
-                    tools:progress="82" />
+                    tools:text="Drama · Crime" />
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="48dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@android:color/white"
+                    android:backgroundTint="@color/material_on_surface_stroke"
+                    app:layout_constraintTop_toBottomOf="@id/genres"
+                    tools:layout_editor_absoluteX="48dp" />
 
                 <TextView
                     android:id="@+id/voteAverage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:padding="16dp"
-                    android:text="@{ viewModel.movieDetails.voteAverageText }"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="8dp"
+                    android:padding="4dp"
+                    android:text="@{ viewModel.movieDetails.voteAverage }"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    app:layout_constraintEnd_toStartOf="@+id/voteCount"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/genres"
                     app:layout_constraintTop_toBottomOf="@+id/data"
-                    tools:text="83%" />
+                    tools:text="8.3" />
 
                 <TextView
                     android:id="@+id/voteCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{ viewModel.movieDetails.voteCount }"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    app:drawableStartCompat="@drawable/ic_person"
-                    app:layout_constraintEnd_toEndOf="@+id/voteAverage"
-                    app:layout_constraintStart_toStartOf="@+id/voteAverage"
-                    app:layout_constraintTop_toBottomOf="@+id/voteAverage"
-                    android:gravity="center_vertical"
+                    android:layout_marginEnd="48dp"
                     android:drawablePadding="4dp"
-                    tools:text="7.714"
-                    app:drawableTint="?attr/colorOnSurface" />
+                    android:gravity="center_vertical"
+                    android:text="@{ viewModel.movieDetails.voteCount }"
+                    android:textAppearance="?attr/textAppearanceCaption"
+                    app:drawableStartCompat="@drawable/ic_person"
+                    app:drawableTint="?attr/colorOnSurface"
+                    app:layout_constraintBottom_toBottomOf="@+id/voteAverage"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/voteAverage"
+                    app:layout_constraintTop_toTopOf="@+id/voteAverage"
+                    app:visible="@{ viewModel.movieDetails != null }"
+                    tools:text="7.714" />
 
                 <TextView
                     android:id="@+id/tagline"
@@ -133,12 +167,14 @@
                     android:layout_marginStart="48dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="48dp"
+                    android:gravity="center"
                     android:text="@{ viewModel.movieDetails.tagline }"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textAppearance="?attr/textAppearanceCaption"
                     android:textStyle="italic"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/voteCount"
+                    app:layout_constraintTop_toBottomOf="@+id/divider"
+                    app:loadingPlaceholder="@{ viewModel.movieDetails }"
                     tools:text="On every street in every city, there's a nobody who dreams of being a somebody." />
 
                 <TextView
@@ -147,9 +183,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/label_overview"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
                     app:layout_constraintStart_toStartOf="@+id/tagline"
-                    app:layout_constraintTop_toBottomOf="@+id/tagline" />
+                    app:layout_constraintTop_toBottomOf="@+id/tagline"
+                    app:loadingPlaceholder="@{ viewModel.movieDetails }"
+                    app:visible="@{ viewModel.movieDetails != null }" />
 
                 <TextView
                     android:id="@+id/overview"
@@ -157,12 +195,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="80dp"
+                    android:minHeight="100dp"
                     android:text="@{ viewModel.movieDetails.overview }"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textAppearance="?attr/textAppearanceBody1"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/tagline"
                     app:layout_constraintStart_toStartOf="@+id/tagline"
                     app:layout_constraintTop_toBottomOf="@+id/overviewLabel"
+                    app:loadingPlaceholder="@{ viewModel.movieDetails }"
                     tools:text="A mentally unstable Vietnam War veteran works as a night-time taxi driver in New York City where the perceived decadence and sleaze feed his urge for violent action, attempting to save a preadolescent prostitute in the process." />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
