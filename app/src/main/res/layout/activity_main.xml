@@ -8,7 +8,7 @@
 
         <import type="com.google.android.material.bottomsheet.BottomSheetBehavior" />
 
-        <import type="com.davidmendozamartinez.movieinfo.presentation.util.ExtensionsKt" />
+        <import type="com.davidmendozamartinez.movieinfo.presentation.util.ViewExtensionsKt" />
 
         <variable
             name="bottomSheetBehavior"
@@ -32,7 +32,7 @@
             android:id="@+id/scrim"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:onClick="@{() -> ExtensionsKt.hide(bottomSheetBehavior) }"
+            android:onClick="@{() -> ViewExtensionsKt.hide(bottomSheetBehavior) }"
             android:visibility="gone" />
 
         <com.google.android.material.navigation.NavigationView
@@ -62,7 +62,7 @@
                 android:drawablePadding="4dp"
                 android:foreground="@drawable/bottom_app_bar_title_foreground"
                 android:gravity="center_vertical"
-                android:onClick="@{() -> ExtensionsKt.show(bottomSheetBehavior) }"
+                android:onClick="@{() -> ViewExtensionsKt.show(bottomSheetBehavior) }"
                 android:paddingHorizontal="8dp"
                 android:text="@string/nav_drawer_popular"
                 android:textAppearance="?attr/textAppearanceBody1"

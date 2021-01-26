@@ -4,16 +4,16 @@
 
     <item
         android:id="@+id/light"
-        android:title="Light"
+        android:title="@string/menu_light"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/dark"
-        android:title="Dark"
+        android:title="@string/menu_dark"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/system_default"
-        android:title="System default"
+        android:title="@string/menu_system_default"
         app:showAsAction="never" />
 </menu>

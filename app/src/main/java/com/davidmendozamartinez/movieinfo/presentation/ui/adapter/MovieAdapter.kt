@@ -40,6 +40,7 @@ class MovieAdapter(private val clickListener: (Int) -> Unit) :
 
         fun bind(item: MovieUI) {
             binding.poster.bindImageFromUrl(item.posterUrl)
+            binding.poster.contentDescription = item.title
         }
     }
 }

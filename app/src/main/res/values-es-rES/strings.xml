@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MovieInfo</string>
+
+    <!-- Navigation drawer item titles -->
+    <string name="nav_drawer_popular">Populares</string>
+    <string name="nav_drawer_top_rated">Relevantes</string>
+    <string name="nav_drawer_upcoming">Estrenos</string>
+    <string name="nav_drawer_favorites">Favoritos</string>
+
+    <!-- Menu item titles -->
+    <string name="menu_light">Modo claro</string>
+    <string name="menu_dark">Modo oscuro</string>
+    <string name="menu_system_default">Predeterminado del sistema</string>
+
+    <!-- MoviesFragment -->
+    <string name="fab_content_description_search_movie">Buscar película</string>
+
+    <!-- DetailsFragment -->
+    <string name="label_overview">Sinopsis</string>
+    <string name="button_add_to_favorites">Añadir a favoritos</string>
+    <string name="button_remove_from_favorites">Eliminar de favoritos</string>
+
+    <!-- SearchFragment -->
+    <string name="hint_search_movie">Buscar película</string>
+    <string name="button_clear_search_content_description">Limpiar búsqueda</string>
+</resources>

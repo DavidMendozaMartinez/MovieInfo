@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MovieInfo</string>
 
@@ -6,6 +7,11 @@
     <string name="nav_drawer_top_rated">Top rated</string>
     <string name="nav_drawer_upcoming">Upcoming</string>
     <string name="nav_drawer_favorites">Favorites</string>
+
+    <!-- Menu item titles -->
+    <string name="menu_light">Light theme</string>
+    <string name="menu_dark">Dark theme</string>
+    <string name="menu_system_default">System default</string>
 
     <!-- MoviesFragment -->
     <string name="fab_content_description_search_movie">Search movie</string>

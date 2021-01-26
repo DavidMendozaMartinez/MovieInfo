@@ -11,6 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
+import java.util.*
 
 fun createTheMovieDBService(): TheMovieDBService {
     val logger = HttpLoggingInterceptor()
@@ -35,21 +36,21 @@ interface TheMovieDBService {
     suspend fun getPopular(
         @Query("page") page: Int = 1,
         @Query("api_key") apiKey: String = BuildConfig.THE_MOVIE_DB_API_KEY,
-        @Query("language") language: String = "en-US"
+        @Query("language") lang: String = with(Locale.getDefault()){"$language-$country"}
     ): GetMoviesReponse
 
     @GET(Routes.GET_TOP_RATED)
     suspend fun getTopRated(
         @Query("page") page: Int = 1,
         @Query("api_key") apiKey: String = BuildConfig.THE_MOVIE_DB_API_KEY,
-        @Query("language") language: String = "en-US",
+        @Query("language") lang: String = with(Locale.getDefault()){"$language-$country"},
     ): GetMoviesReponse
 
     @GET(Routes.GET_UPCOMING)
     suspend fun getUpcoming(
         @Query("page") page: Int = 1,
         @Query("api_key") apiKey: String = BuildConfig.THE_MOVIE_DB_API_KEY,
-        @Query("language") language: String = "en-US",
+        @Query("language") lang: String = with(Locale.getDefault()){"$language-$country"},
     ): GetMoviesReponse
 
     @GET(Routes.SEARCH_MOVIES)
@@ -57,13 +58,13 @@ interface TheMovieDBService {
         @Query("query") query: String,
         @Query("page") page: Int = 1,
         @Query("api_key") apiKey: String = BuildConfig.THE_MOVIE_DB_API_KEY,
-        @Query("language") language: String = "en-US",
+        @Query("language") lang: String = with(Locale.getDefault()){"$language-$country"},
     ): GetMoviesReponse
 
     @GET(Routes.GET_DETAILS)
     suspend fun getDetails(
         @Path("id") id: Int,
         @Query("api_key") apiKey: String = BuildConfig.THE_MOVIE_DB_API_KEY,
-        @Query("language") language: String = "en-US",
+        @Query("language") lang: String = with(Locale.getDefault()){"$language-$country"},
     ): MovieDetailsRemote
 }

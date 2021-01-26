@@ -14,7 +14,6 @@ import com.davidmendozamartinez.movieinfo.presentation.model.Section
 import com.davidmendozamartinez.movieinfo.presentation.ui.movies.MoviesFragmentDirections
 import com.davidmendozamartinez.movieinfo.presentation.ui.search.SearchFragmentDirections
 import com.davidmendozamartinez.movieinfo.presentation.util.hide
-import com.davidmendozamartinez.movieinfo.presentation.util.setFullScreen
 import com.davidmendozamartinez.movieinfo.presentation.util.setScrimAnimation
 import com.davidmendozamartinez.movieinfo.presentation.util.show
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -45,7 +44,6 @@ class MainActivity : AppCompatActivity(),
             )
         }
 
-        setFullScreen()
         setupNavController()
         setupFab()
         setupBottomAppBar()
