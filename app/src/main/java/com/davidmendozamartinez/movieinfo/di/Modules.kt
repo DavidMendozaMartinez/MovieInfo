@@ -4,6 +4,7 @@ import com.davidmendozamartinez.movieinfo.data.local.MovieInfoDatabase
 import com.davidmendozamartinez.movieinfo.data.local.source.MovieLocalDataSource
 import com.davidmendozamartinez.movieinfo.data.remote.createTheMovieDBService
 import com.davidmendozamartinez.movieinfo.data.remote.source.MovieRemoteDataSource
+import com.davidmendozamartinez.movieinfo.data.remote.source.MovieRemoteDataSourceImpl
 import com.davidmendozamartinez.movieinfo.data.repository.MovieRepositoryImpl
 import com.davidmendozamartinez.movieinfo.domain.repository.MovieRepository
 import com.davidmendozamartinez.movieinfo.domain.usecase.*
@@ -33,7 +34,7 @@ val domainModule = module {
 
 val dataModule = module {
     single<MovieRepository> { MovieRepositoryImpl(get(), get()) }
-    single { MovieRemoteDataSource(get()) }
+    single<MovieRemoteDataSource> { MovieRemoteDataSourceImpl(get()) }
     single { MovieLocalDataSource(get()) }
     single { createTheMovieDBService() }
     single { MovieInfoDatabase.getInstance(get()) }

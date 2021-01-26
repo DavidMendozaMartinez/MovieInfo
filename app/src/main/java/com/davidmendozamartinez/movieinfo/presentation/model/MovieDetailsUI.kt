@@ -4,7 +4,7 @@ import com.davidmendozamartinez.movieinfo.domain.model.MovieDetailsDomain
 import com.davidmendozamartinez.movieinfo.presentation.util.ImageURLBuilder
 import com.davidmendozamartinez.movieinfo.presentation.util.ImageURLBuilder.Size
 
-class MovieDetailsUI(
+data class MovieDetailsUI(
     val backdropUrl: String?,
     val genres: String,
     val id: Int,

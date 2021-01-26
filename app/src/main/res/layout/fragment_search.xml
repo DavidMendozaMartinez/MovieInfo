@@ -7,6 +7,7 @@
     <data>
 
         <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.davidmendozamartinez.movieinfo.presentation.ui.search.SearchViewModel" />
@@ -44,7 +45,7 @@
                         android:layout_weight="1"
                         android:background="@null"
                         android:hint="@string/hint_search_movie"
-                        android:imeOptions="flagNoExtractUi|actionSearch"
+                        android:imeOptions="actionSearch"
                         android:importantForAutofill="no"
                         android:inputType="textNoSuggestions" />
 
@@ -80,21 +81,24 @@
             <include
                 android:id="@+id/listContainer"
                 layout="@layout/list_movies"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                app:visible="@{ viewModel.successStateVisibility }"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/divider"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider"
+                app:visible="@{ viewModel.successStateVisibility }" />
 
             <include
                 android:id="@+id/emptyState"
                 layout="@layout/fragment_search_empty_state"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:visible="@{ viewModel.emptyStateVisibility }"
+                android:layout_marginVertical="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/divider"
-                tools:visibility="gone"/>
+                app:visible="@{ viewModel.emptyStateVisibility }"
+                tools:visibility="gone" />
 
             <include
                 android:id="@+id/errorState"

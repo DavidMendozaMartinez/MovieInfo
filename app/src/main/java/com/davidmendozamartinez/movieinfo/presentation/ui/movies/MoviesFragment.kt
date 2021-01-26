@@ -14,6 +14,7 @@ import androidx.paging.LoadState
 import com.davidmendozamartinez.movieinfo.R
 import com.davidmendozamartinez.movieinfo.databinding.FragmentMoviesBinding
 import com.davidmendozamartinez.movieinfo.presentation.ui.adapter.MovieAdapter
+import com.davidmendozamartinez.movieinfo.presentation.util.DataState
 import com.davidmendozamartinez.movieinfo.presentation.util.setStatusBarPadding
 import com.google.android.material.transition.MaterialElevationScale
 import com.google.android.material.transition.MaterialFadeThrough
@@ -57,10 +58,15 @@ class MoviesFragment : Fragment() {
     private fun setupList() {
         val adapter = MovieAdapter { view, id -> navigateToDetails(view, id) }
         adapter.addLoadStateListener { loadState ->
-            viewModel.setLoadingState(loadState.source.refresh is LoadState.Loading)
-            viewModel.setErrorState(loadState.source.refresh is LoadState.Error)
-            viewModel.setEmptyState(loadState.append.endOfPaginationReached && adapter.itemCount == 0)
-            viewModel.setSuccessState(loadState.source.refresh is LoadState.NotLoading)
+            val state: DataState = when (loadState.source.refresh) {
+                is LoadState.Loading -> DataState.LOADING
+                is LoadState.Error -> DataState.ERROR
+                is LoadState.NotLoading ->
+                    if (loadState.append.endOfPaginationReached && adapter.itemCount == 0)
+                        DataState.EMPTY
+                    else DataState.SUCCESS
+            }
+            viewModel.setState(state)
         }
 
         binding.listContainer.recyclerView.adapter = adapter
