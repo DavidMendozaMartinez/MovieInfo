@@ -17,9 +17,9 @@
 
 ## Empty states support
 
-<img src="screenshots/emptyState.jpg" width="200" />
-<img src="screenshots/noResults.jpg" width="200" />
-<img src="screenshots/errorState.jpg" width="200" />
+<img src="screenshots/emptyState.jpg" width="300" />
+<img src="screenshots/noResults.jpg" width="300" />
+<img src="screenshots/errorState.jpg" width="300" />
 
 ## Material Motion Transitions
 
