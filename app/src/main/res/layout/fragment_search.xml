@@ -4,67 +4,106 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".presentation.ui.search.SearchFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+
+        <import type="android.view.View" />
+        <variable
+            name="viewModel"
+            type="com.davidmendozamartinez.movieinfo.presentation.ui.search.SearchViewModel" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:cardCornerRadius="0dp">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clipChildren="false"
-            android:paddingHorizontal="8dp"
-            app:contentInsetStartWithNavigation="0dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:navigationIcon="@drawable/ic_arrow_back">
+            android:layout_height="match_parent">
 
-            <LinearLayout
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:paddingHorizontal="8dp"
+                app:contentInsetStartWithNavigation="0dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:navigationIcon="@drawable/ic_arrow_back">
 
-                <EditText
-                    android:id="@+id/editTextSearch"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/searcher_height"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:hint="@string/hint_search_movie"
-                    android:imeOptions="flagNoExtractUi|actionSearch"
-                    android:importantForAutofill="no"
-                    android:inputType="textNoSuggestions" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
 
-                <ImageButton
-                    android:layout_width="@dimen/searcher_height"
-                    android:layout_height="@dimen/searcher_height"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="@string/button_clear_search_content_description"
-                    android:onClick='@{ () -> editTextSearch.setText("") }'
-                    android:padding="16dp"
-                    android:src="@drawable/ic_remove" />
-            </LinearLayout>
-        </androidx.appcompat.widget.Toolbar>
+                    <EditText
+                        android:id="@+id/editTextSearch"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/searcher_height"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:hint="@string/hint_search_movie"
+                        android:imeOptions="flagNoExtractUi|actionSearch"
+                        android:importantForAutofill="no"
+                        android:inputType="textNoSuggestions" />
 
-        <View
-            android:id="@+id/divider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/white"
-            android:backgroundTint="@color/material_on_surface_stroke"
-            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+                    <ImageButton
+                        android:layout_width="@dimen/searcher_height"
+                        android:layout_height="@dimen/searcher_height"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="@string/button_clear_search_content_description"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:onClick='@{ () -> editTextSearch.setText("") }'
+                        android:padding="16dp"
+                        android:src="@drawable/ic_remove" />
+                </LinearLayout>
+            </androidx.appcompat.widget.Toolbar>
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/divider">
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/white"
+                android:backgroundTint="@color/material_on_surface_stroke"
+                app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+            <ProgressBar
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                app:layout_constraintTop_toBottomOf="@id/divider"
+                app:visible="@{ viewModel.loadingStateVisibility }"
+                tools:visibility="visible" />
 
             <include
                 android:id="@+id/listContainer"
-                layout="@layout/list_movies" />
+                layout="@layout/list_movies"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:visible="@{ viewModel.successStateVisibility }"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider"/>
 
-        </FrameLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <include
+                android:id="@+id/emptyState"
+                layout="@layout/fragment_search_empty_state"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:visible="@{ viewModel.emptyStateVisibility }"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider"
+                tools:visibility="gone"/>
+
+            <include
+                android:id="@+id/errorState"
+                layout="@layout/global_error_state"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:visible="@{ viewModel.errorStateVisibility }"
+                tools:visibility="gone" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 </layout>

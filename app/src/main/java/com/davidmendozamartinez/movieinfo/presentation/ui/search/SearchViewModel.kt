@@ -22,10 +22,21 @@ class SearchViewModel(
 
     private var currentMovies: Flow<PagingData<MovieUI>>? = null
 
+    private var _successStateVisibility: MutableLiveData<Boolean> = MutableLiveData(false)
+    val successStateVisibility: LiveData<Boolean> get() = _successStateVisibility
+
+    private var _loadingStateVisibility: MutableLiveData<Boolean> = MutableLiveData(false)
+    val loadingStateVisibility: LiveData<Boolean> get() = _loadingStateVisibility
+
+    private var _emptyStateVisibility: MutableLiveData<Boolean> = MutableLiveData(false)
+    val emptyStateVisibility: LiveData<Boolean> get() = _emptyStateVisibility
+
+    private var _errorStateVisibility: MutableLiveData<Boolean> = MutableLiveData(false)
+    val errorStateVisibility: LiveData<Boolean> get() = _errorStateVisibility
+
     fun searchMovies(query: String): Flow<PagingData<MovieUI>> {
         val lastResult = currentMovies
-
-        if ((query.trim().isEmpty() || query == _currentQuery.value) && lastResult != null) {
+        if (query == _currentQuery.value && lastResult != null) {
             return lastResult
         }
 
@@ -35,5 +46,21 @@ class SearchViewModel(
             .map { pagingData -> pagingData.map { it.toPresentation() } }
             .cachedIn(viewModelScope)
             .also { currentMovies = it }
+    }
+
+    fun setSuccessState(visible: Boolean) {
+        _successStateVisibility.value = visible
+    }
+
+    fun setLoadingState(visible: Boolean) {
+        _loadingStateVisibility.value = visible
+    }
+
+    fun setEmptyState(visible: Boolean) {
+        _emptyStateVisibility.value = visible
+    }
+
+    fun setErrorState(visible: Boolean) {
+        _errorStateVisibility.value = visible
     }
 }

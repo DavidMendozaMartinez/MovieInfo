@@ -1,15 +1,15 @@
 package com.davidmendozamartinez.movieinfo.presentation.ui.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.davidmendozamartinez.movieinfo.databinding.ItemMovieBinding
 import com.davidmendozamartinez.movieinfo.presentation.model.MovieUI
-import com.davidmendozamartinez.movieinfo.presentation.util.bindImageFromUrl
 
-class MovieAdapter(private val clickListener: (Int) -> Unit) :
+class MovieAdapter(private val clickListener: (View, Int) -> Unit) :
     PagingDataAdapter<MovieUI, MovieAdapter.ViewHolder>(MovieDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -21,7 +21,7 @@ class MovieAdapter(private val clickListener: (Int) -> Unit) :
         item?.let { movie ->
             holder.bind(movie)
             holder.itemView.setOnClickListener {
-                clickListener(movie.id)
+                clickListener(it, movie.id)
             }
         }
     }
@@ -39,7 +39,7 @@ class MovieAdapter(private val clickListener: (Int) -> Unit) :
         }
 
         fun bind(item: MovieUI) {
-            binding.poster.bindImageFromUrl(item.posterUrl)
+            binding.movie = item
             binding.poster.contentDescription = item.title
         }
     }

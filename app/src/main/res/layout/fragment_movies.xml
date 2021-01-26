@@ -1,12 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".presentation.ui.movies.MoviesFragment">
 
-    <include
-        android:id="@+id/listContainer"
-        layout="@layout/list_movies" />
+    <data>
 
-</FrameLayout>
+        <variable
+            name="viewModel"
+            type="com.davidmendozamartinez.movieinfo.presentation.ui.movies.MoviesViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visible="@{ viewModel.loadingStateVisibility }"
+            tools:visibility="gone" />
+
+        <include
+            android:id="@+id/listContainer"
+            layout="@layout/list_movies"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:visible="@{ viewModel.successStateVisibility }"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <include
+            android:id="@+id/emptyState"
+            layout="@layout/fragment_movies_empty_state"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:visible="@{ viewModel.emptyStateVisibility }"
+            tools:visibility="gone" />
+
+        <include
+            android:id="@+id/errorState"
+            layout="@layout/global_error_state"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:visible="@{ viewModel.errorStateVisibility }"
+            tools:visibility="gone" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

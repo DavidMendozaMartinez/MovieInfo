@@ -5,6 +5,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
@@ -18,6 +19,9 @@ import com.davidmendozamartinez.movieinfo.presentation.util.setScrimAnimation
 import com.davidmendozamartinez.movieinfo.presentation.util.show
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.transition.Hold
+import com.google.android.material.transition.MaterialElevationScale
+import com.google.android.material.transition.MaterialFadeThrough
 
 class MainActivity : AppCompatActivity(),
     NavController.OnDestinationChangedListener,
@@ -31,6 +35,12 @@ class MainActivity : AppCompatActivity(),
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<NavigationView>
+
+    private val currentNavigationFragment: Fragment?
+        get() = supportFragmentManager.findFragmentById(R.id.navHostFragment)
+            ?.childFragmentManager
+            ?.fragments
+            ?.first()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -116,10 +126,25 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun navigateToHome(section: Section) {
+        currentNavigationFragment?.apply {
+            exitTransition = MaterialFadeThrough().apply {
+                duration = resources.getInteger(R.integer.motion_duration_large).toLong()
+            }
+        }
+
         navController.navigate(MoviesFragmentDirections.actionGlobalMoviesFragment(section))
     }
 
     private fun navigateToSearch() {
+        currentNavigationFragment?.apply {
+            exitTransition = Hold().apply {
+                duration = resources.getInteger(R.integer.motion_duration_large).toLong()
+            }
+            reenterTransition = Hold().apply {
+                duration = resources.getInteger(R.integer.motion_duration_large).toLong()
+            }
+        }
+
         navController.navigate(SearchFragmentDirections.actionGlobalSearchFragment())
     }
 }

@@ -18,11 +18,11 @@
     </style>
 
     <style name="TextAppearance.MovieInfo.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
-        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="fontFamily">@font/roboto</item>
     </style>
 
     <style name="TextAppearance.MovieInfo.Headline6" parent="TextAppearance.MaterialComponents.Headline6">
-        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="fontFamily">@font/roboto</item>
     </style>
 
     <style name="TextAppearance.MovieInfo.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">

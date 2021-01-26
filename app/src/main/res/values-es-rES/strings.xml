@@ -14,7 +14,9 @@
     <string name="menu_system_default">Predeterminado del sistema</string>
 
     <!-- MoviesFragment -->
-    <string name="fab_content_description_search_movie">Buscar película</string>
+    <string name="fab_search_movie_content_description">Buscar película</string>
+    <string name="fragment_movies_empty_state_title">No se han encontrado películas</string>
+    <string name="fragment_movies_empty_state_message">Prueba a buscar por título y añade a favoritos las que más te gusten</string>
 
     <!-- DetailsFragment -->
     <string name="label_overview">Sinopsis</string>
@@ -24,4 +26,11 @@
     <!-- SearchFragment -->
     <string name="hint_search_movie">Buscar película</string>
     <string name="button_clear_search_content_description">Limpiar búsqueda</string>
+    <string name="fragment_search_empty_state_title">No se han encontrado resultados</string>
+    <string name="fragment_search_empty_state_message">Intenta utilizar otras palabras</string>
+
+    <!-- GlobalErrorState -->
+    <string name="global_error_state_title">Ha ocurrido un error</string>
+    <string name="global_error_state_message">Por favor, inténtalo de nuevo más tarde</string>
+    <string name="global_error_state_retry">Reintentar</string>
 </resources>

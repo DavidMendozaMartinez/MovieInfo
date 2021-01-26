@@ -1,5 +1,7 @@
 package com.davidmendozamartinez.movieinfo.presentation.ui.movies
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
@@ -25,6 +27,18 @@ class MoviesViewModel(
 
     private var currentMovies: Flow<PagingData<MovieUI>>? = null
 
+    private var _successStateVisibility: MutableLiveData<Boolean> = MutableLiveData(false)
+    val successStateVisibility: LiveData<Boolean> get() = _successStateVisibility
+
+    private var _loadingStateVisibility: MutableLiveData<Boolean> = MutableLiveData(false)
+    val loadingStateVisibility: LiveData<Boolean> get() = _loadingStateVisibility
+
+    private var _emptyStateVisibility: MutableLiveData<Boolean> = MutableLiveData(false)
+    val emptyStateVisibility: LiveData<Boolean> get() = _emptyStateVisibility
+
+    private var _errorStateVisibility: MutableLiveData<Boolean> = MutableLiveData(false)
+    val errorStateVisibility: LiveData<Boolean> get() = _errorStateVisibility
+
     fun getMovies(section: Section): Flow<PagingData<MovieUI>> {
         return currentMovies ?: requestMovies(section)
             .map { pagingData -> pagingData.map { it.toPresentation() } }
@@ -37,5 +51,21 @@ class MoviesViewModel(
         Section.TOP_RATED -> getTopRatedMoviesUseCase.invoke()
         Section.UPCOMING -> getUpcomingMoviesUseCase.invoke()
         Section.FAVORITES -> getFavoriteMoviesUseCase.invoke()
+    }
+
+    fun setSuccessState(visible: Boolean) {
+        _successStateVisibility.value = visible
+    }
+
+    fun setLoadingState(visible: Boolean) {
+        _loadingStateVisibility.value = visible
+    }
+
+    fun setEmptyState(visible: Boolean) {
+        _emptyStateVisibility.value = visible
+    }
+
+    fun setErrorState(visible: Boolean) {
+        _errorStateVisibility.value = visible
     }
 }

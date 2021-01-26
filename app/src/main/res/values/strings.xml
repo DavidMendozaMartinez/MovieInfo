@@ -13,10 +13,16 @@
     <string name="menu_dark">Dark theme</string>
     <string name="menu_system_default">System default</string>
 
+    <!-- Movie list -->
+    <string name="movie_card_transition_name" translatable="false">movie_card_%1$s</string>
+
     <!-- MoviesFragment -->
-    <string name="fab_content_description_search_movie">Search movie</string>
+    <string name="fab_search_movie_content_description">Search movie</string>
+    <string name="fragment_movies_empty_state_title">No movies found</string>
+    <string name="fragment_movies_empty_state_message">Try searching by title and add the movies you like the most to favorites</string>
 
     <!-- DetailsFragment -->
+    <string name="details_transition_name" translatable="false">movie_details</string>
     <string name="label_overview">Overview</string>
     <string name="button_add_to_favorites">Add to favorites</string>
     <string name="button_remove_from_favorites">Remove from favorites</string>
@@ -24,4 +30,11 @@
     <!-- SearchFragment -->
     <string name="hint_search_movie">Search movie</string>
     <string name="button_clear_search_content_description">Clear search</string>
+    <string name="fragment_search_empty_state_title">No results found</string>
+    <string name="fragment_search_empty_state_message">Try adjusting your search</string>
+
+    <!-- GlobalErrorState -->
+    <string name="global_error_state_title">An error occurred</string>
+    <string name="global_error_state_message">Please try again later</string>
+    <string name="global_error_state_retry">Retry</string>
 </resources>

@@ -4,13 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.paging.LoadState
+import com.davidmendozamartinez.movieinfo.R
 import com.davidmendozamartinez.movieinfo.databinding.FragmentMoviesBinding
 import com.davidmendozamartinez.movieinfo.presentation.ui.adapter.MovieAdapter
 import com.davidmendozamartinez.movieinfo.presentation.util.setStatusBarPadding
+import com.google.android.material.transition.MaterialElevationScale
+import com.google.android.material.transition.MaterialFadeThrough
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -22,6 +28,13 @@ class MoviesFragment : Fragment() {
     private val viewModel: MoviesViewModel by viewModel()
     private val args: MoviesFragmentArgs by navArgs()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enterTransition = MaterialFadeThrough().apply {
+            duration = resources.getInteger(R.integer.motion_duration_large).toLong()
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,13 +45,27 @@ class MoviesFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+
+        postponeEnterTransition()
+        view.doOnPreDraw { startPostponedEnterTransition() }
+
         setupList()
     }
 
     private fun setupList() {
-        val adapter = MovieAdapter { navigateToDetails(it) }
+        val adapter = MovieAdapter { view, id -> navigateToDetails(view, id) }
+        adapter.addLoadStateListener { loadState ->
+            viewModel.setLoadingState(loadState.source.refresh is LoadState.Loading)
+            viewModel.setErrorState(loadState.source.refresh is LoadState.Error)
+            viewModel.setEmptyState(loadState.append.endOfPaginationReached && adapter.itemCount == 0)
+            viewModel.setSuccessState(loadState.source.refresh is LoadState.NotLoading)
+        }
+
         binding.listContainer.recyclerView.adapter = adapter
         binding.listContainer.recyclerView.setStatusBarPadding()
+        binding.errorState.buttonRetry.setOnClickListener { adapter.retry() }
 
         lifecycleScope.launch {
             viewModel.getMovies(args.section).collectLatest {
@@ -47,9 +74,19 @@ class MoviesFragment : Fragment() {
         }
     }
 
-    private fun navigateToDetails(movieId: Int) {
+    private fun navigateToDetails(view: View, movieId: Int) {
+        exitTransition = MaterialElevationScale(false).apply {
+            duration = resources.getInteger(R.integer.motion_duration_large).toLong()
+        }
+        reenterTransition = MaterialElevationScale(true).apply {
+            duration = resources.getInteger(R.integer.motion_duration_large).toLong()
+        }
+
+        val detailsTransitionName = getString(R.string.details_transition_name)
+        val extras = FragmentNavigatorExtras(view to detailsTransitionName)
         findNavController().navigate(
-            MoviesFragmentDirections.actionMoviesFragmentToDetailsFragment(movieId)
+            MoviesFragmentDirections.actionMoviesFragmentToDetailsFragment(movieId),
+            extras
         )
     }
 

@@ -11,6 +11,13 @@
             type="com.davidmendozamartinez.movieinfo.presentation.ui.details.DetailsViewModel" />
     </data>
 
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="0dp"
+        android:transitionName="@string/details_transition_name">
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -69,7 +76,7 @@
                         android:layout_height="match_parent"
                         android:importantForAccessibility="no"
                         android:scaleType="centerCrop"
-                        app:imageFromUrl="@{ viewModel.movieDetails.posterUrl }"
+                        app:roundedImageFromUrl="@{ viewModel.movieDetails.posterUrl }"
                         app:loadingPlaceholder="@{ viewModel.movieDetails }"
                         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
@@ -242,4 +249,5 @@
             tools:visibility="gone" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </com.google.android.material.card.MaterialCardView>
 </layout>

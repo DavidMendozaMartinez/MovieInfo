@@ -31,7 +31,7 @@ class MoviePagingSource(
 
             val data = response.results.map { it.toDomain() }
             val prevKey = if (page == THE_MOVIE_DB_STARTING_PAGE_INDEX) null else page - 1
-            val nextKey = if (page == response.totalPages) null else page + 1
+            val nextKey = if (page >= response.totalPages) null else page + 1
 
             LoadResult.Page(data, prevKey, nextKey)
 

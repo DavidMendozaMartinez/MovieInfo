@@ -9,8 +9,9 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:clipToPadding="false"
-        android:paddingVertical="24dp"
         android:paddingHorizontal="8dp"
+        android:paddingVertical="24dp"
+        android:transitionGroup="true"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="@integer/movies_span_count"
         tools:listitem="@layout/item_movie" />
