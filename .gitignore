@@ -1,6 +1,5 @@
 .gradle
 .DS_Store
-*.apk
 *.ap_
 *.dex
 *.class
