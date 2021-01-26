@@ -1,10 +1,12 @@
 package com.davidmendozamartinez.movieinfo.presentation.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
@@ -20,7 +22,6 @@ import com.davidmendozamartinez.movieinfo.presentation.util.show
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.transition.Hold
-import com.google.android.material.transition.MaterialElevationScale
 import com.google.android.material.transition.MaterialFadeThrough
 
 class MainActivity : AppCompatActivity(),
@@ -30,11 +31,14 @@ class MainActivity : AppCompatActivity(),
 
     companion object {
         private const val KEY_SECTION_TITLE = "section_title_key"
+        private const val KEY_LOCAL_MODE = "local_mode_key"
     }
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<NavigationView>
+
+    private val sharedPreferences by lazy { getPreferences(Context.MODE_PRIVATE) }
 
     private val currentNavigationFragment: Fragment?
         get() = supportFragmentManager.findFragmentById(R.id.navHostFragment)
@@ -53,6 +57,7 @@ class MainActivity : AppCompatActivity(),
                 getString(Section.POPULAR.stringResId)
             )
         }
+        setLocalNightMode(getLocalNightMode())
 
         setupNavController()
         setupFab()
@@ -117,12 +122,25 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun onMenuItemClick(item: MenuItem?): Boolean {
-        delegate.localNightMode = when (item?.itemId) {
+        val mode = when (item?.itemId) {
             R.id.light -> AppCompatDelegate.MODE_NIGHT_NO
             R.id.dark -> AppCompatDelegate.MODE_NIGHT_YES
             else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
         }
+        saveLocalNightMode(mode)
+        setLocalNightMode(mode)
         return true
+    }
+
+    private fun setLocalNightMode(mode: Int) {
+        delegate.localNightMode = mode
+    }
+
+    private fun getLocalNightMode(): Int =
+        sharedPreferences.getInt(KEY_LOCAL_MODE, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+
+    private fun saveLocalNightMode(mode: Int) = sharedPreferences.edit {
+        putInt(KEY_LOCAL_MODE, mode)
     }
 
     private fun navigateToHome(section: Section) {
