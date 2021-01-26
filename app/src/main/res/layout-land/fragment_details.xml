@@ -22,7 +22,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:visible="@{ !viewModel.errorStateVisibility }">
 
             <ImageView
                 android:id="@+id/backdrop"
@@ -44,9 +45,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:indeterminate="true"
-                app:layout_constraintTop_toBottomOf="@id/backdrop"
-                app:visible="@{ viewModel.movieDetails == null }"
-                tools:visibility="gone" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:visible="@{ viewModel.loadingStateVisibility }"
+                tools:visibility="visible" />
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/poster"
@@ -66,8 +67,8 @@
                     android:layout_height="match_parent"
                     android:importantForAccessibility="no"
                     android:scaleType="centerCrop"
-                    app:roundedImageFromUrl="@{ viewModel.movieDetails.posterUrl }"
                     app:loadingPlaceholder="@{ viewModel.movieDetails }"
+                    app:roundedImageFromUrl="@{ viewModel.movieDetails.posterUrl }"
                     tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
             </com.google.android.material.card.MaterialCardView>
@@ -240,7 +241,7 @@
                 android:layout_marginBottom="16dp"
                 android:onClick="@{() -> viewModel.addToFavorites(viewModel.movieDetails) }"
                 android:text="@string/button_add_to_favorites"
-                android:visibility="@{ !viewModel.isFavorite() ? View.VISIBLE : View.INVISIBLE }"
+                android:visibility="@{ viewModel.buttonAddToFavoritesVisibility ? View.VISIBLE : View.INVISIBLE }"
                 app:icon="@drawable/ic_favorite"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/dataContainer"
@@ -261,9 +262,18 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/dataContainer"
                 app:layout_constraintStart_toStartOf="@+id/dataContainer"
-                app:visible="@{ viewModel.isFavorite() }"
+                app:visible="@{ viewModel.buttonRemoveFromFavoritesVisibility }"
                 tools:visibility="gone" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <include
+            android:id="@+id/errorState"
+            layout="@layout/global_error_state"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:visible="@{ viewModel.errorStateVisibility }"
+            tools:visibility="gone" />
+
     </com.google.android.material.card.MaterialCardView>
 </layout>

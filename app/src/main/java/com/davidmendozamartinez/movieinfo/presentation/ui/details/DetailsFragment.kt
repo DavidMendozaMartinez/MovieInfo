@@ -49,6 +49,7 @@ class DetailsFragment : Fragment() {
         binding.lifecycleOwner = this
 
         viewModel.getMovieDetails(movieId)
+        binding.errorState.buttonRetry.setOnClickListener { viewModel.getMovieDetails(movieId) }
     }
 
     override fun onDestroyView() {

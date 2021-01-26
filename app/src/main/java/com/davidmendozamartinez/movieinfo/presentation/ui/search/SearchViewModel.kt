@@ -25,7 +25,7 @@ class SearchViewModel(
     private var _successStateVisibility: MutableLiveData<Boolean> = MutableLiveData(false)
     val successStateVisibility: LiveData<Boolean> get() = _successStateVisibility
 
-    private var _loadingStateVisibility: MutableLiveData<Boolean> = MutableLiveData(false)
+    private var _loadingStateVisibility: MutableLiveData<Boolean> = MutableLiveData(true)
     val loadingStateVisibility: LiveData<Boolean> get() = _loadingStateVisibility
 
     private var _emptyStateVisibility: MutableLiveData<Boolean> = MutableLiveData(false)
