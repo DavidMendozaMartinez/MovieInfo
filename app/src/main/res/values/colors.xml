@@ -8,8 +8,9 @@
 
     <color name="white_50">#FFFFFFFF</color>
     <color name="white_50_alpha_010">#1AFFFFFF</color>
-    <color name="white_200">#F0F0F0</color>
-    <color name="white_200_alpha_060">#99F0F0F0</color>
+    <color name="white_300">#F0F0F0</color>
+    <color name="white_300_alpha_060">#99F0F0F0</color>
+    <color name="white_400">#DEDEDE</color>
 
     <color name="black_800">#FF262626</color>
     <color name="black_900">#FF000000</color>

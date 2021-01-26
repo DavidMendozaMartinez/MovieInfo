@@ -38,6 +38,7 @@
                 <ImageButton
                     android:layout_width="@dimen/searcher_height"
                     android:layout_height="@dimen/searcher_height"
+                    android:foreground="?attr/selectableItemBackground"
                     android:background="@android:color/transparent"
                     android:contentDescription="@string/button_clear_search_content_description"
                     android:onClick='@{ () -> editTextSearch.setText("") }'

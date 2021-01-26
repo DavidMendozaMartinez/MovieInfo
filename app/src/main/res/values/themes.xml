@@ -10,8 +10,8 @@
         <item name="colorSecondary">@color/red_700</item>
         <item name="colorSecondaryVariant">@color/red_900</item>
 
-        <item name="android:colorBackground">@color/white_200</item>
-        <item name="colorSurface">@color/white_200</item>
+        <item name="android:colorBackground">@color/white_300</item>
+        <item name="colorSurface">@color/white_400</item>
         <item name="colorError">@color/red_800</item>
 
         <item name="colorOnPrimary">@color/white_50</item>
@@ -43,7 +43,6 @@
         <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.MovieInfo.LargeComponent</item>
 
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/white_200_alpha_060</item>
-        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/black_900_alpha_060</item>
     </style>
 </resources>
